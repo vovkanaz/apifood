@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'calendar/index'
+  get '/calendar/google_drive_connect'
+  get '/calendar/callback'
+  get '/calendar/token'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

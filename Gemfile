@@ -45,3 +45,6 @@ group :development do
   gem 'spring'
 end
 
+gem 'google-api-client', '0.8.2'
+
+gem 'omniauth-google-oauth2', :git => 'https://github.com/zquestz/omniauth-google-oauth2.git'
