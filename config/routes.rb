@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
+  get 'home/index'
+
+  devise_for :users
+  root to: 'home#index'
   get 'calendar/index'
   get '/calendar/google_drive_connect'
   get '/calendar/callback'
-  get '/calendar/token'
+  get '/calendar/calendars'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
