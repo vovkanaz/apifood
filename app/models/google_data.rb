@@ -1,5 +1,3 @@
-class CalendarController 
-
 
 require 'google/api_client'
 require 'google/api_client/client_secrets'
@@ -79,4 +77,4 @@ results = client.execute!(
    end
 
 end
-end
+

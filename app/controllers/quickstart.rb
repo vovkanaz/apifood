@@ -1,18 +1,12 @@
-class CalendarController 
-
-
 require 'google/api_client'
 require 'google/api_client/client_secrets'
 require 'google/api_client/auth/installed_app'
 require 'google/api_client/auth/storage'
 require 'google/api_client/auth/storages/file_store'
 require 'fileutils'
-require "google_drive"
 
-
-
-APPLICATION_NAME = 'Apifood'
-CLIENT_SECRETS_PATH = 'client_secrets.json'
+APPLICATION_NAME = 'APIFOOD'
+CLIENT_SECRETS_PATH = 'client_secret.json'
 CREDENTIALS_PATH = File.join(Dir.home, '.credentials',
                              "calendar-ruby-quickstart.json")
 SCOPE = 'https://www.googleapis.com/auth/calendar.readonly'
@@ -24,7 +18,7 @@ SCOPE = 'https://www.googleapis.com/auth/calendar.readonly'
 # to approve the request.
 #
 # @return [Signet::OAuth2::Client] OAuth2 credentials
-def self.get_data
+def authorize
   FileUtils.mkdir_p(File.dirname(CREDENTIALS_PATH))
 
   file_store = Google::APIClient::FileStore.new(CREDENTIALS_PATH)
@@ -40,11 +34,12 @@ def self.get_data
     auth = flow.authorize(storage)
     puts "Credentials saved to #{CREDENTIALS_PATH}" unless auth.nil?
   end
-
+  auth
+end
 
 # Initialize the API
 client = Google::APIClient.new(:application_name => APPLICATION_NAME)
-client.authorization = auth
+client.authorization = authorize
 calendar_api = client.discovered_api('calendar', 'v3')
 
 # Fetch the next 10 events for the user
@@ -57,26 +52,9 @@ results = client.execute!(
     :orderBy => 'startTime',
     :timeMin => Time.now.iso8601 })
 
-@items = results.data['items']
-
- session = GoogleDrive.saved_session("config.json")
-    # https://docs.google.com/spreadsheet/ccc?key=pz7XtlQC-PYx-jrVMJErTcg
-    # Or https://docs.google.com/a/someone.com/spreadsheets/d/pz7XtlQC-PYx-jrVMJErTcg/edit?usp=drive_web
-    ws = session.spreadsheet_by_key("1xHpCUwP29EK-Z5fpk9WHLJpxPdvtNJ2HhP-nmk9RxeU").worksheets[0]
-
-    (1..ws.num_rows).each do |row|
-      (1..ws.num_cols).each do |col|
-      end
-    end
-
-    # Changes content of cells.
-    # Changes are not sent to the server until you call ws.save().
-    @items.each do |item|
-      count = ws.rows.length + 1
-      ws[count, 1] = item['summary']
-      ws[count, 2] = item['description']
-      ws.save
-   end
-
-end
+puts "Upcoming events:"
+puts "No upcoming events found" if results.data.items.empty?
+results.data.items.each do |event|
+  start = event.start.date || event.start.date_time
+  puts "- #{event.summary} (#{start})"
 end
