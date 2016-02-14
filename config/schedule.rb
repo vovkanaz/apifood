@@ -18,6 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 5.minutes do
+every 1.minute do
   rake 'get_food'
 end

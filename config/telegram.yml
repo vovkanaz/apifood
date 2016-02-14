@@ -1,0 +1,3 @@
+peer: 'Игорь_Музыка'
+key_path: '/home/intel/apifood/tg/server.pub'
+telegram_path: '/home/intel/apifood/tg/bin/telegram-cli'

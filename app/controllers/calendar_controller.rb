@@ -8,11 +8,10 @@ require 'google/api_client/auth/storage'
 require 'google/api_client/auth/storages/file_store'
 require 'fileutils'
 require "google_drive"
-
+require 'telegram/bot'
 require 'selenium-webdriver'
 require_dependency 'online_cafe'
-
-
+require_dependency 'telegram_message'
 
 APPLICATION_NAME = 'Apifood'
 CLIENT_SECRETS_PATH = 'client_secrets.json'
@@ -78,16 +77,19 @@ SCOPE = 'https://www.googleapis.com/auth/calendar.readonly'
           order = []
           order = params_for_order(order_position)
           price_counter += OnlineCafe.add_order(driver, order.first, order.last)*order.last
-          order_list << "#{order.first} #{order.last}"
+         order_list << "#{order.first} #{order.last}"
         end
+        d = DateTime.now
         count = ws.rows.length + 1
-        ws[count, 1] = DateTime.now
-        ws[count, 2] = order_list.join(', ')
+        ws[count, 1] = d.strftime('%m.%d.%Y в %I:%M%p')
+        ws[count, 2] = item['description']
         ws[count, 3] = "#{price_counter} грн."
         ws.save
+        order = item['description']
+        TelegramMessageService.instance.send("Вы заказали #{order} на суму #{price_counter} грн.")
       end
     OnlineCafe.send_checkout_form(driver, "First name", "Last name", "Company", "Customer adress", "Room 123", "customer_email@example.com", "0931234567")
-    driver.save_screenshot("./screen#{DateTime.now}.png")
+    driver.save_screenshot("./order_screen/screen#{DateTime.now}.png")
     driver.quit
   end
 

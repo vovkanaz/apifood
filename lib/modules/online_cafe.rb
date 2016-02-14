@@ -28,7 +28,7 @@ module OnlineCafe
     
     def self.send_checkout_form(driver, first_name, last_name, company, adress, room, email, phone_number)
       driver.get "http://online-cafe.ck.ua/site/checkout/"
-      puts "Page title #{driver.title}"
+      #puts "Page title #{driver.title}"
       driver.find_element(:id,"billing_first_name").send_keys "#{first_name}"
       driver.find_element(:id,"billing_last_name").send_keys "#{last_name}"
       driver.find_element(:id,"billing_company").send_keys "#{company}"
