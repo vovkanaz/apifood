@@ -86,7 +86,7 @@ SCOPE = 'https://www.googleapis.com/auth/calendar.readonly'
         ws[count, 3] = "#{price_counter} грн."
         ws.save
         order = item['description']
-        #TelegramMessageService.instance.send("Вы заказали #{order} на суму #{price_counter} грн.")
+        TelegramMessageService.instance.send("Вы заказали #{order_list.join(', ')} на суму #{price_counter} грн.")
       end
     OnlineCafe.send_checkout_form(driver, "First name", "Last name", "Company", "Customer adress", "Room 123", "customer_email@example.com", "0931234567")
     driver.save_screenshot("./order_screen/screen#{d.strftime('%m.%d.%Y в %I:%M%p')}.png")
