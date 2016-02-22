@@ -12,3 +12,4 @@
 !/log/.keep
 /tmp
 /app/controllers/config.json
+/order_screen

@@ -77,19 +77,19 @@ SCOPE = 'https://www.googleapis.com/auth/calendar.readonly'
           order = []
           order = params_for_order(order_position)
           price_counter += OnlineCafe.add_order(driver, order.first, order.last)*order.last
-         order_list << "#{order.first} #{order.last}"
+         order_list << "#{order.first} --> #{order.last}"
         end
         d = DateTime.now
         count = ws.rows.length + 1
         ws[count, 1] = d.strftime('%m.%d.%Y в %I:%M%p')
-        ws[count, 2] = item['description']
+        ws[count, 2] = order_list.join(', ')
         ws[count, 3] = "#{price_counter} грн."
         ws.save
         order = item['description']
-        TelegramMessageService.instance.send("Вы заказали #{order} на суму #{price_counter} грн.")
+        TelegramMessageService.instance.send("Вы заказали #{order_list.join(', ')} на суму #{price_counter} грн.")
       end
     OnlineCafe.send_checkout_form(driver, "First name", "Last name", "Company", "Customer adress", "Room 123", "customer_email@example.com", "0931234567")
-    driver.save_screenshot("./order_screen/screen#{DateTime.now}.png")
+    driver.save_screenshot("./order_screen/screen#{d.strftime('%m.%d.%Y в %I:%M%p')}.png")
     driver.quit
   end
 
@@ -98,9 +98,12 @@ SCOPE = 'https://www.googleapis.com/auth/calendar.readonly'
   def self.params_for_order(order_position)
       order_array = []
       dishes_number = order_position.split.last
-      dish = (order_position.split - dishes_number.split).join(' ')
-      order_array << dish
-      order_array << dishes_number.to_i
+      if dishes_number.to_i != 0
+        dish = (order_position.split - dishes_number.split).join(' ')
+        order_array << dish.squish << dishes_number.to_i
+      else
+        order_array << order_position.squish << 1
+      end
   end
 
 end
