@@ -6,7 +6,7 @@ require 'google/api_client/auth/storages/file_store'
 require 'fileutils'
 
 APPLICATION_NAME = 'APIFOOD'
-CLIENT_SECRETS_PATH = 'client_secret.json'
+CLIENT_SECRETS_PATH = 'client_secrets.json'
 CREDENTIALS_PATH = File.join(Dir.home, '.credentials',
                              "calendar-ruby-quickstart.json")
 SCOPE = 'https://www.googleapis.com/auth/calendar.readonly'
@@ -54,7 +54,4 @@ results = client.execute!(
 
 puts "Upcoming events:"
 puts "No upcoming events found" if results.data.items.empty?
-results.data.items.each do |event|
-  start = event.start.date || event.start.date_time
-  puts "- #{event.summary} (#{start})"
-end
+puts results.data['items']
