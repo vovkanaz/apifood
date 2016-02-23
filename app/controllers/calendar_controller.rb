@@ -12,6 +12,7 @@ require 'telegram/bot'
 require 'selenium-webdriver'
 require_dependency 'online_cafe'
 require_dependency 'telegram_message'
+require_dependency 'editor'
 
 APPLICATION_NAME = 'Apifood'
 CLIENT_SECRETS_PATH = 'client_secrets.json'
@@ -68,7 +69,7 @@ SCOPE = 'https://www.googleapis.com/auth/calendar.readonly'
 
     driver = Selenium::WebDriver.for:phantomjs
     driver.manage.window.maximize
-
+      d = DateTime.now.strftime('%m.%d.%Y в %I:%M%p')
       price_counter = 0
       order_list = []
       @items.each do |item|
@@ -76,12 +77,15 @@ SCOPE = 'https://www.googleapis.com/auth/calendar.readonly'
         total_order.each do |order_position|
           order = []
           order = params_for_order(order_position)
-          price_counter += OnlineCafe.add_order(driver, order.first, order.last)*order.last
-         order_list << "#{order.first} --> #{order.last}"
+          dish_name = Editor.delete_needless_symbols(order.first)
+          puts dish_name
+          dishes_number = order.last
+          puts dishes_number
+          price_counter += OnlineCafe.add_order(driver, dish_name, dishes_number)*dishes_number
+         order_list << "#{dish_name} --> #{dishes_number}"
         end
-        d = DateTime.now
         count = ws.rows.length + 1
-        ws[count, 1] = d.strftime('%m.%d.%Y в %I:%M%p')
+        ws[count, 1] = d
         ws[count, 2] = order_list.join(', ')
         ws[count, 3] = "#{price_counter} грн."
         ws.save
@@ -89,7 +93,7 @@ SCOPE = 'https://www.googleapis.com/auth/calendar.readonly'
         TelegramMessageService.instance.send("Вы заказали #{order_list.join(', ')} на суму #{price_counter} грн.")
       end
     OnlineCafe.send_checkout_form(driver, "First name", "Last name", "Company", "Customer adress", "Room 123", "customer_email@example.com", "0931234567")
-    driver.save_screenshot("./order_screen/screen#{d.strftime('%m.%d.%Y в %I:%M%p')}.png")
+    driver.save_screenshot("./order_screen/screen#{d}.png")
     driver.quit
   end
 
