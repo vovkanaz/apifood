@@ -13,3 +13,4 @@
 /tmp
 /app/controllers/config.json
 /order_screen
+lib/modules/client_secrets.json
