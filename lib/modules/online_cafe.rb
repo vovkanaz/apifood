@@ -4,6 +4,8 @@ module OnlineCafe
 
     def self.add_order(driver, dish_name, dishes_number)
       page_link = nil
+      module_respond = Hash.new
+      dish_name = Editor.delete_needless_symbols(dish_name)
       SiteMap.online_cafe.each_pair do |dishes_array, link|
         dishes_array.each do |dish|
           if Editor.delete_needless_symbols(dish) == dish_name
@@ -24,9 +26,12 @@ module OnlineCafe
               element.find_element(:link, "Добавить в корзину").click
               sleep 7
             end
-            return element.find_element(:class, "amount").text.to_f
+            module_respond = { price: element.find_element(:class, "amount").text.to_f, error: false }
+            return module_respond
           end
         end
+      else
+        module_respond = { price: 0, error: true }
       end
     end
     

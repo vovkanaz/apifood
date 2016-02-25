@@ -20,42 +20,47 @@ require_dependency 'google_auth'
     driver.manage.window.maximize
       order_date = DateTime.now.strftime('%m.%d.%Y в %I:%M%p')
       price_counter = 0
-      order_list = []
+      order_list = Array.new
       @items.each do |item|
-        total_order = item['description'].split(',')
+        total_order = item['description'].split(', ')
         total_order.each do |order_position|
-          order = []
+          order = Hash.new
           order = params_for_order(order_position)
-          dish_name = Editor.delete_needless_symbols(order.first)
-          #puts dish_name
-          dishes_number = order.last
-          #puts dishes_number
-          price_counter += OnlineCafe.add_order(driver, dish_name, dishes_number)*dishes_number
-         order_list << "#{dish_name} --> #{dishes_number}"
+          puts order[:dish_name]
+          puts order[:dish_number]
+          module_respond = OnlineCafe.add_order(driver, order[:dish_name], order[:dish_number])
+          puts module_respond
+          unless module_respond[:error]
+            price_counter += module_respond[:price] * order[:dish_number]
+            order_list << "#{order[:dish_name]} --> #{order[:dish_number]}"
+          else
+            puts "Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!"
+            #Telegram.send_message("Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!")
+          end
         end
         count = ws.rows.length + 1
         ws[count, 1] = order_date
         ws[count, 2] = order_list.join(', ')
         ws[count, 3] = "#{price_counter} грн."
         ws.save
-        #order = item['description']
-        Telegram.send_message("Ви замовили #{order_list.join(', ')} на суму #{price_counter} грн.")
+        puts "Ви замовили #{order_list.join(', ')} на суму #{price_counter} грн."
+        #Telegram.send_message("Ви замовили \"#{order_list.join(', ')}\" на суму #{price_counter} грн.")
       end
     OnlineCafe.send_checkout_form(driver, "First name", "Last name", "Company", "Customer adress", "Room 123", "customer_email@example.com", "0931234567")
-    driver.save_screenshot("./order_screen/screen#{d}.png")
+    driver.save_screenshot("./order_screen/screen#{order_date}.png")
     driver.quit
   end
 
   private
 
   def self.params_for_order(order_position)
-      order_array = []
+      order_hash = Hash.new
       dishes_number = order_position.split.last
       if dishes_number.to_i != 0
-        dish = (order_position.split - dishes_number.split).join(' ')
-        order_array << dish.squish << dishes_number.to_i
+        dish_name = (order_position.split - dishes_number.split).join(' ')
+        order_hash = { dish_name: dish_name.squish, dish_number: dishes_number.to_i }
       else
-        order_array << order_position.squish << 1
+        order_hash = { dish_name: order_position.squish, dish_number: 1 }
       end
   end
 
