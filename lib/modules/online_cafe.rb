@@ -26,12 +26,14 @@ module OnlineCafe
               element.find_element(:link, "Добавить в корзину").click
               sleep 7
             end
-            module_respond = { price: element.find_element(:class, "amount").text.to_f, error: false }
+            module_respond = { price: element.find_element(:class, "amount").text.to_f, 
+                               dish_name: dish_name,
+                               error: false }
             return module_respond
           end
         end
       else
-        module_respond = { price: 0, error: true }
+        module_respond = { price: 0, dish_name: nil, error: true }
       end
     end
     
