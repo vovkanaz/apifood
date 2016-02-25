@@ -18,7 +18,7 @@ require_dependency 'google_auth'
 
     driver = Selenium::WebDriver.for:phantomjs
     driver.manage.window.maximize
-      d = DateTime.now.strftime('%m.%d.%Y в %I:%M%p')
+      order_date = DateTime.now.strftime('%m.%d.%Y в %I:%M%p')
       price_counter = 0
       order_list = []
       @items.each do |item|
@@ -27,19 +27,19 @@ require_dependency 'google_auth'
           order = []
           order = params_for_order(order_position)
           dish_name = Editor.delete_needless_symbols(order.first)
-          puts dish_name
+          #puts dish_name
           dishes_number = order.last
-          puts dishes_number
+          #puts dishes_number
           price_counter += OnlineCafe.add_order(driver, dish_name, dishes_number)*dishes_number
          order_list << "#{dish_name} --> #{dishes_number}"
         end
         count = ws.rows.length + 1
-        ws[count, 1] = d
+        ws[count, 1] = order_date
         ws[count, 2] = order_list.join(', ')
         ws[count, 3] = "#{price_counter} грн."
         ws.save
-        order = item['description']
-        TelegramMessageService.instance.send("Вы замовили #{order_list.join(', ')} на суму #{price_counter} грн.")
+        #order = item['description']
+        Telegram.send_message("Ви замовили #{order_list.join(', ')} на суму #{price_counter} грн.")
       end
     OnlineCafe.send_checkout_form(driver, "First name", "Last name", "Company", "Customer adress", "Room 123", "customer_email@example.com", "0931234567")
     driver.save_screenshot("./order_screen/screen#{d}.png")
