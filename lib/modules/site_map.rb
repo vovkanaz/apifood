@@ -51,4 +51,12 @@ module SiteMap
        "http://online-cafe.ck.ua/site/product-category/napoyi/"}
   end
 
+  def self.bambolina
+    site_map = {
+      ["Пицца №1", "Пицца №2", "Пицца №3"] => 
+        "http://bambolina.ck.ua/menu-pizzerii/pizza",
+      ["Салат Весенний", "Салат Итальянский", "Салат Греческий"] => 
+        "http://bambolina.ck.ua/menu-pizzerii/salaty"}
+  end
+  
 end

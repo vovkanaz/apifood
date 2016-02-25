@@ -1,6 +1,7 @@
 module Order
 
-  def self.execute(item, driver)
+  def self.execute(item, driver, module_name)
+    module_name = module_name.constantize
     price_counter = 0
     order_list = Array.new
     total_order = item['description'].split(', ')
@@ -9,7 +10,7 @@ module Order
       order = params_for_order(order_position)
       puts order[:dish_name]
       puts order[:dishes_number]
-      module_respond = OnlineCafe.add_order(driver, order[:dish_name], order[:dishes_number])
+      module_respond = module_name.add_order(driver, order[:dish_name], order[:dishes_number])
       puts module_respond
       unless module_respond[:error]
         price_counter += module_respond[:price] * order[:dishes_number]
@@ -19,7 +20,7 @@ module Order
         #Telegram.send_message("Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!")
       end
     end
-    OnlineCafe.send_checkout_form(driver, "First name", "Last name", "Company", "Customer adress", "Room 123", "customer_email@example.com", "0931234567")
+    module_name.send_checkout_form(driver, "First name", "Last name", "Company", "Customer adress", "Room 123", "customer_email@example.com", "0931234567")
     return { order_list: order_list, price_counter: price_counter }
   end
 
