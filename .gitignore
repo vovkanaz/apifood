@@ -13,4 +13,5 @@
 /tmp
 /app/controllers/config.json
 /order_screen
-lib/modules/client_secrets.json
+/lib/modules/client_secrets.json
+/config/database.yml

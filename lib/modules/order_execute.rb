@@ -10,14 +10,14 @@ module Order
       order = params_for_order(order_position)
       puts order[:dish_name]
       puts order[:dishes_number]
-      module_respond = module_name.add_order(driver, order[:dish_name], order[:dishes_number])
-      puts module_respond
-      unless module_respond[:error]
-        price_counter += module_respond[:price] * order[:dishes_number]
-        order_list << "#{module_respond[:dish_name]} --> #{order[:dishes_number]}"
+      module_response = module_name.add_order(driver, order[:dish_name], order[:dishes_number])
+      puts module_response
+      unless module_response[:error]
+        price_counter += module_response[:price] * order[:dishes_number]
+        order_list << "#{module_response[:dish_name]} --> #{order[:dishes_number]}"
       else
         puts "Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!"
-        Telegram.send_message("Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!")
+        #Telegram.send_message("Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!")
       end
     end
     module_name.send_checkout_form(driver, "First name", "Last name", "Company", "Customer adress", "Room 123", "customer_email@example.com", "0931234567")
