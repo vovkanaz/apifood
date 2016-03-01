@@ -11,7 +11,7 @@ module Bambolina
           break
         end
       end
-      break unless page_link.nil?
+      break if page_link
     end
     unless page_link.nil?
       driver.get page_link

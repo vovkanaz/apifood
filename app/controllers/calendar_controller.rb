@@ -5,7 +5,7 @@ require 'telegram/bot'
 require 'selenium-webdriver'
 require_dependency 'telegram_message'
 require_dependency 'online_cafe'
-#require_dependency 'bambolina'
+require_dependency 'bambolina'
 require_dependency 'editor'
 require_dependency 'google_auth'
 require_dependency 'order_execute'
@@ -24,7 +24,7 @@ require_dependency 'order_execute'
 
       order_date = DateTime.now.strftime('%m.%d.%Y в %I:%M%p')
       executed_order = Hash.new
-      executed_order = Order.execute(item, driver, "Bambolina")
+      executed_order = Order.execute(item, driver, "OnlineCafe")
       GoogleServices::Table.save_order(ws, order_date, executed_order[:order_list], executed_order[:price_counter])
       puts "Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн."
       #Telegram.send_message("Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн.")
