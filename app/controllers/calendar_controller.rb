@@ -27,7 +27,7 @@ require_dependency 'order_execute'
       executed_order = Order.execute(item, driver, "OnlineCafe")
       GoogleServices::Table.save_order(ws, order_date, executed_order[:order_list], executed_order[:price_counter])
       puts "Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн."
-      #Telegram.send_message("Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн.")
+      Telegram.send_message("Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн.")
     
       driver.save_screenshot("./order_screen/screen#{order_date}.png")
       driver.quit

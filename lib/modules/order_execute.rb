@@ -17,7 +17,7 @@ module Order
         order_list << "#{module_respond[:dish_name]} --> #{order[:dishes_number]}"
       else
         puts "Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!"
-        #Telegram.send_message("Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!")
+        Telegram.send_message("Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!")
       end
     end
     module_name.send_checkout_form(driver, "First name", "Last name", "Company", "Customer adress", "Room 123", "customer_email@example.com", "0931234567")
