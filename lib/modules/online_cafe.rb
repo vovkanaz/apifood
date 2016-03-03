@@ -3,8 +3,8 @@ require 'site_map.rb'
 module OnlineCafe
 
     def self.add_order(driver, dish_name, dishes_number)
-      page_link = nil
       module_respond = Hash.new
+      page_link = nil
       dish_name = Editor.delete_needless_symbols(dish_name)
       shop = Shop.where(name: "Online_cafe").first
       shop[:site_map].each_pair do |dishes_array, link|

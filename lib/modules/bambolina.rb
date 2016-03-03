@@ -1,8 +1,8 @@
 module Bambolina
   
   def self.add_order(driver, dish_name, dishes_number)
-    page_link = nil
     module_respond = Hash.new
+    page_link = nil
     dish_name = Editor.delete_needless_symbols(dish_name)
     SiteMap.bambolina.each_pair do |dishes_array, link|
       dishes_array.each do |dish|

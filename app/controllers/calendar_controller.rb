@@ -26,16 +26,20 @@ require_dependency 'site_map_builder'
       order_date = DateTime.now.strftime('%m.%d.%Y в %I:%M%p')
       executed_order = Hash.new
       executed_order = Order.execute(item, driver, "OnlineCafe")
-      GoogleServices::Table.save_order(ws, order_date, executed_order[:order_list], executed_order[:price_counter])
-      puts "Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн."
-      #Telegram.send_message("Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн.")
-    
-      driver.save_screenshot("./order_screen/screen#{order_date}.png")
+      unless executed_order[:error]
+        GoogleServices::Table.save_order(ws, order_date, executed_order[:order_list], executed_order[:price_counter])
+        #puts "Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн."
+        Telegram.send_message("Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн.")
+        driver.save_screenshot("./order_screen/screen#{order_date}.png")
+      else
+        #puts "Не вдалося виконате замовлення, відредагуйте його текст"
+        Telegram.send_message("Не вдалося виконате замовлення, відредагуйте його текст")
+      end
       driver.quit
     end
   end
 
-  def self.update_site_maps
+  def self.update_site_map
     driver = Selenium::WebDriver.for:phantomjs
     shops = Shop.all
     shops.each do |shop|

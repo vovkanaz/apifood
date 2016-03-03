@@ -16,12 +16,17 @@ module Order
         price_counter += module_response[:price] * order[:dishes_number]
         order_list << "#{module_response[:dish_name]} --> #{order[:dishes_number]}"
       else
-        puts "Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!"
-        #Telegram.send_message("Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!")
+        #puts "Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!"
+        Telegram.send_message("Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!")
       end
     end
-    module_name.send_checkout_form(driver, "First name", "Last name", "Company", "Customer adress", "Room 123", "customer_email@example.com", "0931234567")
-    return { order_list: order_list, price_counter: price_counter }
+    unless order_list == []
+      module_name.send_checkout_form(driver, "First name", "Last name", "Company", "Customer adress", 
+                                     "Room 123", "customer_email@example.com", "0931234567")
+      return { order_list: order_list, price_counter: price_counter, error: false }
+    else
+      return { order_list: nil, price_counter: 0, error: true }
+    end
   end
 
   private
