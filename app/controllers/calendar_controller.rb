@@ -39,8 +39,10 @@ require_dependency 'site_map_builder'
     driver = Selenium::WebDriver.for:phantomjs
     shops = Shop.all
     shops.each do |shop|
-      method_name = "build_for_#{shop.name}".downcase
-      shop.update_attributes(site_map: SiteMap.send(method_name, driver))
+      site_map = {}
+      method_name = "for_#{shop.name}".downcase
+      site_map = SiteMapBuild.send(method_name, driver)
+      shop.update_attributes(site_map: site_map)
     end
     driver.quit
   end
