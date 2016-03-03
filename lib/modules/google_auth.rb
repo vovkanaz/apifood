@@ -1,5 +1,5 @@
-module Calendar
-  class Events
+module GoogleServices
+  class Calendar
     require 'google/api_client'
     require 'google/api_client/client_secrets'
     require 'google/api_client/auth/installed_app'
@@ -13,7 +13,7 @@ module Calendar
                                  "calendar-ruby-quickstart.json")
     SCOPE = 'https://www.googleapis.com/auth/calendar.readonly'
 
-    def self.get_data
+    def self.get_event
       FileUtils.mkdir_p(File.dirname(CREDENTIALS_PATH))
 
       file_store = Google::APIClient::FileStore.new(CREDENTIALS_PATH)
@@ -50,4 +50,17 @@ module Calendar
       results.data['items']
     end
   end
+
+  class Table
+
+    def self.save_order(ws, order_date, order_list, price_counter)
+      count = ws.rows.length + 1
+      ws[count, 1] = order_date
+      ws[count, 2] = order_list.join(', ')
+      ws[count, 3] = "#{price_counter} грн."
+      ws.save
+    end
+
+  end
+
 end

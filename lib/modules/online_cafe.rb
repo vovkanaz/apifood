@@ -3,8 +3,11 @@ require 'site_map.rb'
 module OnlineCafe
 
     def self.add_order(driver, dish_name, dishes_number)
+      module_respond = Hash.new
       page_link = nil
-      SiteMap.online_cafe.each_pair do |dishes_array, link|
+      dish_name = Editor.delete_needless_symbols(dish_name)
+      shop = Shop.where(name: "Online_cafe").first
+      shop[:site_map].each_pair do |dishes_array, link|
         dishes_array.each do |dish|
           if Editor.delete_needless_symbols(dish) == dish_name
             page_link = link
@@ -24,9 +27,14 @@ module OnlineCafe
               element.find_element(:link, "Добавить в корзину").click
               sleep 7
             end
-            return element.find_element(:class, "amount").text.to_f
+            module_response = { price: element.find_element(:class, "amount").text.to_f, 
+                               dish_name: dish_name,
+                               error: false }
+            return module_response
           end
         end
+      else
+        module_response = { price: 0, dish_name: nil, error: true }
       end
     end
     
