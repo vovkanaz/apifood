@@ -1,34 +1,20 @@
-require 'site_map.rb'
-
 module OnlineCafe
 
-    def self.add_order(driver, dish_name, dishes_number)
+    def self.add_order(driver, position)
       module_respond = Hash.new
-      page_link = nil
-      dish_name = Editor.delete_needless_symbols(dish_name)
-      shop = Shop.where(name: "Online_cafe").first
-      shop[:site_map].each_pair do |dishes_array, link|
-        dishes_array.each do |dish|
-          if Editor.delete_needless_symbols(dish) == dish_name
-            page_link = link
-            break
-          end
-        end
-        break unless page_link.nil?
-      end
-      unless page_link.nil?
-        driver.get page_link
+      if position[:link]
+        driver.get position[:link]
         elements = driver.find_elements(:tag_name, "li")
         puts elements
         elements.each do |element|
           name = element.find_element(:tag_name, "h3").text rescue false
-          if Editor.delete_needless_symbols(name.to_s) == dish_name
-            dishes_number.times do
+          if Editor.delete_needless_symbols(name.to_s) == position[:dish_name]
+            position[:dishes_number].times do
               element.find_element(:link, "Добавить в корзину").click
               sleep 7
             end
             module_response = { price: element.find_element(:class, "amount").text.to_f, 
-                               dish_name: dish_name,
+                               dish_name: position[:dish_name],
                                error: false }
             return module_response
           end
@@ -47,6 +33,7 @@ module OnlineCafe
       driver.find_element(:id,"billing_address_2").send_keys "#{room}"
       driver.find_element(:id,"billing_email").send_keys "#{email}"
       driver.find_element(:id,"billing_phone").send_keys "#{phone_number}"
+      driver.save_screenshot("./order_screen/OnlineCafe#{DateTime.now}.png")
     end
 
 end
