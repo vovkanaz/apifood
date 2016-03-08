@@ -57,13 +57,14 @@ require_dependency 'site_map_builder'
   end
 
   def self.update_site_map
-    driver = Selenium::WebDriver.for:phantomjs
+    driver = Selenium::WebDriver.for:firefox
+    #phantomjs
     shops = Shop.all
     shops.each do |shop|
       site_map = {}
       method_name = "for_#{shop.name}".downcase.gsub(' ', '_')
       site_map = SiteMapBuild.send(method_name, driver)
-      shop.update_attributes(site_map: site_map)
+      shop.update_attributes(site_map: site_map) if site_map
     end
     driver.quit
   end
