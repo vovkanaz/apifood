@@ -51,4 +51,4 @@ gem 'google-api-client', '0.8.2'
 gem 'google_drive'
 gem 'omniauth-google-oauth2', :git => 'https://github.com/zquestz/omniauth-google-oauth2.git'
 gem 'whenever', :require => false
-gem 'telegram-bot-ruby'
+gem 'sidekiq', '~> 4.1', '>= 4.1.1'
