@@ -8,6 +8,7 @@ class DeferredJob < ActiveJob::Base
   require_dependency 'editor'
   require_dependency 'google_auth'
   require_dependency 'order'
+
   def perform
     items =  GoogleServices::Calendar.get_event
 
@@ -22,30 +23,15 @@ class DeferredJob < ActiveJob::Base
 
       order_date = DateTime.now.strftime('%m.%d.%Y в %I:%M%p')
       total_order = Hash.new
-
-      order_array = item['description'].split(', ')
-      order_array.each do |order_position|
-        single_order = Hash.new
-        single_order = Order.handle_order_position(order_position)
-        if single_order[:shop_name]
-          shop_name = single_order[:shop_name].to_sym
-          total_order[shop_name] = [] unless total_order[shop_name]
-          total_order[shop_name] << single_order
-        else
-          puts "Неможливо обробити запит \"#{order_position}\". Відредагуйте текст замовлення!"
-          Telegram.send_message("Неможливо обробити запит \"#{order_position}\". Відредагуйте текст замовлення!")
-        end
-      end
+      total_order = Order.prepare(item)
 
       total_order.each_pair do |shop_name, order_for_shop|
         executed_order = Hash.new
         executed_order = Order.execute(driver, order_for_shop, shop_name.to_s)
         unless executed_order[:error]
           GoogleServices::Table.save_order(ws, order_date, executed_order[:order_list], executed_order[:price_counter])
-          puts "В #{shop_name.to_s} Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн."
           Telegram.send_message("В #{shop_name.to_s} Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн.")
         else
-          puts "Не вдалося виконате замовлення із #{shop_name.to_s}, відредагуйте його текст"
           Telegram.send_message("Не вдалося виконате замовлення, відредагуйте його текст")
         end
       end

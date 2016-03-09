@@ -46,9 +46,9 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-gem 'devise'
-gem 'google-api-client', '0.8.2'
-gem 'google_drive'
-gem 'omniauth-google-oauth2', :git => 'https://github.com/zquestz/omniauth-google-oauth2.git'
-gem 'whenever', :require => false
-gem 'sidekiq', '~> 4.1', '>= 4.1.1'
+  gem 'devise'
+  gem 'google-api-client', '0.8.2'
+  gem 'google_drive'
+  gem 'omniauth-google-oauth2', :git => 'https://github.com/zquestz/omniauth-google-oauth2.git'
+  gem 'whenever', :require => false
+  gem 'sidekiq', '~> 4.1', '>= 4.1.1'
