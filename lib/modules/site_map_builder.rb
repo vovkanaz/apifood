@@ -24,22 +24,18 @@ module SiteMapBuild
     categories = Array.new
     links_to_categories = Array.new
     categories = driver.find_elements(params_hash[:categories].first, params_hash[:categories].last)
-    puts categories
     categories.each { |category| links_to_categories << category.find_element(:tag_name, "a").attribute("href") }
-    puts links_to_categories
     links_to_categories.each do |link|
       product_titles_array = []
       driver.get link
+      sleep 10
       products = driver.find_elements(params_hash[:products].first, params_hash[:products].last)
-      puts products
       products.each do |product|
-        product_title = product.find_element(params_hash[:product_title].first, params_hash[:product_title].last).text rescue nil
+        product_title = product.find_element(params_hash[:product_title].first, params_hash[:product_title].last).text
         product_titles_array << product_title if product_title
       end
-      puts product_titles_array
       site_map[product_titles_array] = link
     end
-    puts site_map
     site_map
   end
 

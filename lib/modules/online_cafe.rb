@@ -5,7 +5,6 @@ module OnlineCafe
       if position[:link]
         driver.get position[:link]
         elements = driver.find_elements(:tag_name, "li")
-        puts elements
         elements.each do |element|
           name = element.find_element(:tag_name, "h3").text rescue false
           if Editor.delete_needless_symbols(name.to_s) == position[:dish_name]
@@ -13,10 +12,9 @@ module OnlineCafe
               element.find_element(:link, "Добавить в корзину").click
               sleep 7
             end
-            module_response = { price: element.find_element(:class, "amount").text.to_f, 
-                               dish_name: position[:dish_name],
-                               error: false }
-            return module_response
+            return { price: element.find_element(:class, "amount").text.to_f, 
+                     dish_name: position[:dish_name],
+                     error: false }
           end
         end
       else
