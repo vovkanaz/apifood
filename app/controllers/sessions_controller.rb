@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
     @events = result.data['items']
+    redirect_to root_path
   end
 
   def destroy
