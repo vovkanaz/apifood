@@ -18,7 +18,8 @@ module GoogleServices
 
       file_store = Google::APIClient::FileStore.new(CREDENTIALS_PATH)
       storage = Google::APIClient::Storage.new(file_store)
-      auth = storage.authorize
+      puts auth = storage.authorize
+
 
       if auth.nil? || (auth.expired? && auth.refresh_token.nil?)
         app_info = Google::APIClient::ClientSecrets.load(CLIENT_SECRETS_PATH)
@@ -27,13 +28,15 @@ module GoogleServices
                                                            :client_secret => app_info.client_secret,
                                                            :scope => SCOPE})
         auth = flow.authorize(storage)
-        puts "Credentials saved to #{CREDENTIALS_PATH}" unless auth.nil?
+       puts "Credentials saved to #{CREDENTIALS_PATH}" unless auth.nil?
       end
 
 
 # Initialize the API
       client = Google::APIClient.new(:application_name => APPLICATION_NAME)
       client.authorization = auth
+      puts "##########################################################"
+      puts client.authorization
       calendar_api = client.discovered_api('calendar', 'v3')
 
 # Fetch the next 10 events for the user
