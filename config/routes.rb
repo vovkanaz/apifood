@@ -1,12 +1,29 @@
 Rails.application.routes.draw do
-  get 'home/index'
+  #get 'sessions/create'
 
-  devise_for :users
-  root to: 'home#index'
-  get 'calendar/index'
-  get '/calendar/google_drive_connect'
-  get '/calendar/callback'
-  get '/calendar/calendars'
+  #get 'sessions/destroy'
+
+  #get 'home/show'
+
+  #GoogleAuthExample::Application.routes.draw do
+    get 'auth/:provider/callback', to: 'sessions#create'
+    get 'auth/failure', to: redirect('/')
+    get 'signout', to: 'sessions#destroy', as: 'signout'
+
+    resources :sessions, only: [:create, :destroy]
+    resource :home, only: [:show]
+
+    root to: "home#show"
+  #end
+
+  #get 'home/index'
+
+  #devise_for :users
+  #root to: 'home#index'
+  #get 'calendar/index'
+  #get '/calendar/google_drive_connect'
+  #get '/calendar/callback'
+  #get '/calendar/calendars'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

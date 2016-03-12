@@ -8,10 +8,11 @@ class DeferredJob < ActiveJob::Base
   require_dependency 'editor'
   require_dependency 'google_auth'
   require_dependency 'order'
+  require_dependency 'sessions_controller'
 
-  def perform
-    items =  GoogleServices::Calendar.get_event
-
+    def perform
+    #items =  GoogleServices::Calendar.get_event
+    items =  SessionsController.create
     session = GoogleDrive.saved_session("config.json")
     # https://docs.google.com/spreadsheet/ccc?key=pz7XtlQC-PYx-jrVMJErTcg
     # Or https://docs.google.com/a/someone.com/spreadsheets/d/pz7XtlQC-PYx-jrVMJErTcg/edit?usp=drive_web

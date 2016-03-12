@@ -239,7 +239,9 @@ DEPENDENCIES
   google_drive
   jbuilder (~> 2.0)
   jquery-rails
+  json
   mysql2 (~> 0.3.18)
+  omniauth (~> 1.2.2)
   omniauth-google-oauth2!
   rails (= 4.2.4)
   sass-rails (~> 5.0)
