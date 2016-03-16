@@ -5,6 +5,7 @@ require 'selenium-webdriver'
 require_dependency 'telegram_message'
 require_dependency 'online_cafe'
 require_dependency 'bambolina'
+require_dependency 'fugu'
 require_dependency 'editor'
 require_dependency 'google_auth'
 require_dependency 'order'
@@ -17,6 +18,7 @@ require_dependency 'site_map_builder'
 
   def self.update_site_map
     driver = Selenium::WebDriver.for:phantomjs
+    driver.manage.window.maximize
     shops = Shop.all
     shops.each do |shop|
       site_map = {}
