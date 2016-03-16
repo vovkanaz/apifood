@@ -11,11 +11,8 @@ require_dependency 'order'
 require_dependency 'site_map_builder'
 
   def self.handle_order
-    #Telegram.send_message("Ваше замовлення обробляеться!")
-    User.where.not(oauth_token: nil).each do |user|
-      #p user.get_events
-      DeferredJob.perform_later
-    #puts "UTAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    Telegram.send_message("Ваше замовлення обробляеться!")
+    DeferredJob.perform_later
     end
   end
 
@@ -33,4 +30,4 @@ require_dependency 'site_map_builder'
     end
     driver.quit
   end
-end
+#end
