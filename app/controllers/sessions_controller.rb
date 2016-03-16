@@ -19,6 +19,7 @@ class SessionsController < ApplicationController
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
 
+    puts user.oauth_token
     if result.data.items.empty?
       redirect_to root_path
       flash[:alert] = "No events find"

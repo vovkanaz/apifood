@@ -1,6 +1,7 @@
 class DeferredJob < ActiveJob::Base
   queue_as :default
-  require "google_drive"
+  require 'google/api_client'
+  require 'google_drive'
   require 'selenium-webdriver'
   require_dependency 'telegram_message'
   require_dependency 'online_cafe'
@@ -11,14 +12,14 @@ class DeferredJob < ActiveJob::Base
   require_dependency 'sessions_controller'
 
     def perform
-    #items =  GoogleServices::Calendar.get_event
-    items =  SessionsController.create
-    session = GoogleDrive.saved_session("config.json")
+     session = GoogleDrive.saved_session("config.json")
     # https://docs.google.com/spreadsheet/ccc?key=pz7XtlQC-PYx-jrVMJErTcg
     # Or https://docs.google.com/a/someone.com/spreadsheets/d/pz7XtlQC-PYx-jrVMJErTcg/edit?usp=drive_web
-    ws = session.spreadsheet_by_key("1xHpCUwP29EK-Z5fpk9WHLJpxPdvtNJ2HhP-nmk9RxeU").worksheets[0]
-
-    items.each do |item|
+     ws = session.spreadsheet_by_key("1xHpCUwP29EK-Z5fpk9WHLJpxPdvtNJ2HhP-nmk9RxeU").worksheets[0]
+     User.where.not(oauth_token: nil).each do |user|
+      #Telegram.send_message(user.get_events)
+      user.get_events.each do |item|
+      #Telegram.send_message(item['description'])
       driver = Selenium::WebDriver.for:phantomjs
       driver.manage.window.maximize
 
@@ -37,6 +38,7 @@ class DeferredJob < ActiveJob::Base
         end
       end
       driver.quit
-    end
+      end
+      end
   end
 end

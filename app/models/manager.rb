@@ -1,4 +1,4 @@
-class CalendarController
+class Manager
 
 require "google_drive"
 require 'selenium-webdriver'
@@ -24,6 +24,7 @@ require_dependency 'site_map_builder'
       site_map = {}
       if shop.name
         method_name = "for_#{shop.name}".downcase.gsub(' ', '_')
+        puts method_name
         site_map = SiteMapBuild.send(method_name, driver)
         shop.update_attributes(site_map: site_map) if site_map
       end

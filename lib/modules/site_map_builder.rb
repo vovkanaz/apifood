@@ -5,6 +5,7 @@ module SiteMapBuild
                          categories: [:class, "product-category"],
                          products: [:tag_name, "li"],
                          product_title: [:class, "products-list-title"]}
+
     get_site_map(driver, online_cafe_hash)
   end
 
@@ -40,6 +41,7 @@ module SiteMapBuild
     categories = menu.find_elements(params_hash[:categories].first, params_hash[:categories].last)
     categories.each { |category| links_to_categories << category.find_element(:tag_name, "a").attribute("href") }
     links_to_categories.each do |link|
+      puts link
       product_titles_array = []
       driver.get link
       sleep 10
@@ -48,6 +50,7 @@ module SiteMapBuild
       products.each do |product|
         product_title = product.find_element(params_hash[:product_title].first, params_hash[:product_title].last).text rescue nil
         product_titles_array << product_title if product_title
+        puts product_title
       end
       site_map[product_titles_array] = link
     end
