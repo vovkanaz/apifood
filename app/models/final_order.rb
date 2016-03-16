@@ -14,8 +14,6 @@ require_dependency 'site_map_builder'
     Telegram.send_message("Ваше замовлення обробляеться!")
     DeferredJob.perform_later
     end
-  end
-
 
   def self.update_site_map
     driver = Selenium::WebDriver.for:phantomjs
@@ -30,4 +28,4 @@ require_dependency 'site_map_builder'
     end
     driver.quit
   end
-#end
+end

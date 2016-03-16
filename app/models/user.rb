@@ -25,10 +25,7 @@ class User < ActiveRecord::Base
             :orderBy => 'startTime',
             :timeMin => Time.now.iso8601 })
 
-    if result.data.items.empty?
-      {}
-    else
-   result.data['items']
-    end
-  end
+    result.data['items']
+   end
 end
+#end

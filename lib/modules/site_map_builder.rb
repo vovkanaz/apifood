@@ -5,6 +5,7 @@ module SiteMapBuild
                          categories: [:class, "product-category"],
                          products: [:tag_name, "li"],
                          product_title: [:class, "products-list-title"]}
+
     get_site_map(driver, online_cafe_hash)
   end
 
@@ -32,6 +33,7 @@ module SiteMapBuild
       products = driver.find_elements(params_hash[:products].first, params_hash[:products].last)
       products.each do |product|
         product_title = product.find_element(params_hash[:product_title].first, params_hash[:product_title].last).text
+
         product_titles_array << product_title if product_title
       end
       site_map[product_titles_array] = link

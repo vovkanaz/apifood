@@ -17,8 +17,9 @@ class DeferredJob < ActiveJob::Base
     # Or https://docs.google.com/a/someone.com/spreadsheets/d/pz7XtlQC-PYx-jrVMJErTcg/edit?usp=drive_web
      ws = session.spreadsheet_by_key("1xHpCUwP29EK-Z5fpk9WHLJpxPdvtNJ2HhP-nmk9RxeU").worksheets[0]
      User.where.not(oauth_token: nil).each do |user|
-
+      #Telegram.send_message(user.get_events)
       user.get_events.each do |item|
+      #Telegram.send_message(item['description'])
       driver = Selenium::WebDriver.for:phantomjs
       driver.manage.window.maximize
 
