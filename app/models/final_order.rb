@@ -1,4 +1,4 @@
-class CalendarController
+class FinalOrder
 
 require "google_drive"
 require 'selenium-webdriver'
@@ -11,9 +11,14 @@ require_dependency 'order'
 require_dependency 'site_map_builder'
 
   def self.handle_order
-    Telegram.send_message("Ваше замовлення обробляеться!")
-    DeferredJob.perform_later
+    #Telegram.send_message("Ваше замовлення обробляеться!")
+    User.where.not(oauth_token: nil).each do |user|
+      #p user.get_events
+      DeferredJob.perform_later
+    #puts "UTAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    end
   end
+
 
   def self.update_site_map
     driver = Selenium::WebDriver.for:phantomjs

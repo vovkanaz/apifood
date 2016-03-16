@@ -35,8 +35,6 @@ module GoogleServices
 # Initialize the API
       client = Google::APIClient.new(:application_name => APPLICATION_NAME)
       client.authorization = auth
-      puts "##########################################################"
-      puts client.authorization
       calendar_api = client.discovered_api('calendar', 'v3')
 
 # Fetch the next 10 events for the user
