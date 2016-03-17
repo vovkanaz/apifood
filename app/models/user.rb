@@ -28,4 +28,3 @@ class User < ActiveRecord::Base
     result.data['items']
    end
 end
-#end
