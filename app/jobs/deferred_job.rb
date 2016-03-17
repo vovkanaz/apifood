@@ -12,11 +12,20 @@ class DeferredJob < ActiveJob::Base
   require_dependency 'sessions_controller'
 
     def perform
-     session = GoogleDrive.saved_session("config.json")
+     #session = GoogleDrive.saved_session("config.json")
     # https://docs.google.com/spreadsheet/ccc?key=pz7XtlQC-PYx-jrVMJErTcg
     # Or https://docs.google.com/a/someone.com/spreadsheets/d/pz7XtlQC-PYx-jrVMJErTcg/edit?usp=drive_web
-     ws = session.spreadsheet_by_key("1xHpCUwP29EK-Z5fpk9WHLJpxPdvtNJ2HhP-nmk9RxeU").worksheets[0]
+     #ws = session.spreadsheet_by_key("1xHpCUwP29EK-Z5fpk9WHLJpxPdvtNJ2HhP-nmk9RxeU").worksheets[0]
+
      User.where.not(oauth_token: nil).each do |user|
+      google_drive_session = GoogleDrive.login_with_oauth(user.oauth_token)
+    
+      spreadsheet = google_drive_session.create_spreadsheet(title = "Food")
+      ws = spreadsheet.worksheets[0]
+      ws[1, 1] = "Дата"
+      ws[1, 2] = "Заказ"
+      ws[1, 3] = "Сумма"
+      ws.save
       #Telegram.send_message(user.get_events)
       user.get_events.each do |item|
       #Telegram.send_message(item['description'])
@@ -33,10 +42,10 @@ class DeferredJob < ActiveJob::Base
         unless executed_order[:error]
           GoogleServices::Table.save_order(ws, order_date, executed_order[:order_list], executed_order[:price_counter])
           puts "В #{shop_name.to_s} Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн."
-          Telegram.send_message("В #{shop_name.to_s} Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн.")
+          #Telegram.send_message("В #{shop_name.to_s} Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн.")
         else
           puts "Не вдалося виконате замовлення, відредагуйте його текст"
-          Telegram.send_message("Не вдалося виконате замовлення, відредагуйте його текст")
+          #Telegram.send_message("Не вдалося виконате замовлення, відредагуйте його текст")
         end
       end
       driver.quit
