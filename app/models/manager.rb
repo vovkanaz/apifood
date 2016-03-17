@@ -13,7 +13,7 @@ require_dependency 'site_map_builder'
 
   def self.handle_order
     puts "Ваше замовлення обробляеться!"
-    Telegram.send_message("Ваше замовлення обробляеться!")
+    #Telegram.send_message("Ваше замовлення обробляеться!")
     DeferredJob.perform_later
   end
 
