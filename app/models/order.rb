@@ -1,4 +1,4 @@
-module Order
+class Order
 
   def self.prepare(item)
     #Telegram.send_message(item['description'])
@@ -13,7 +13,7 @@ module Order
           total_order[shop_name] << single_order
         else
           puts "Неможливо обробити запит \"#{order_position}\". Відредагуйте текст замовлення!"
-          #Telegram.send_message("Неможливо обробити запит \"#{order_position}\". Відредагуйте текст замовлення!")
+          Telegram.send_message("Неможливо обробити запит \"#{order_position}\". Відредагуйте текст замовлення!")
         end
       end
     total_order
@@ -30,7 +30,7 @@ module Order
         order_list << "#{module_response[:dish_name]} --> #{position[:dishes_number]}"
       else
         puts "Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!"
-        #Telegram.send_message("Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!")
+        Telegram.send_message("Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!")
       end
     end
     if order_list

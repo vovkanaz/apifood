@@ -1,19 +1,18 @@
 class Manager
 
-require "google_drive"
-require 'selenium-webdriver'
-require_dependency 'telegram_message'
-require_dependency 'online_cafe'
-require_dependency 'bambolina'
-require_dependency 'fugu'
-require_dependency 'editor'
-require_dependency 'google_auth'
-require_dependency 'order'
-require_dependency 'site_map_builder'
+  require "google_drive"
+  require 'selenium-webdriver'
+  require_dependency 'telegram_message'
+  require_dependency 'online_cafe'
+  require_dependency 'bambolina'
+  require_dependency 'fugu'
+  require_dependency 'editor'
+  require_dependency 'google_auth'
+  require_dependency 'site_map_builder'
 
   def self.handle_order
-    puts "Ваше замовлення обробляеться!"
-    #Telegram.send_message("Ваше замовлення обробляеться!")
+    puts "Ваше замовлення обробляється!"
+    Telegram.send_message("Ваше замовлення обробляеться!")
     DeferredJob.perform_later
   end
 
