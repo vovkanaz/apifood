@@ -5,16 +5,18 @@ Rails.application.routes.draw do
 
   #get 'home/show'
 
-  #GoogleAuthExample::Application.routes.draw do
+
     get 'auth/:provider/callback', to: 'sessions#create'
     get 'auth/failure', to: redirect('/')
     get 'signout', to: 'sessions#destroy', as: 'signout'
-
+    get 'telegram', to: 'sessions#telegram'
+    post '/159528223:AAFA-XoRiLy3-fYxKWDdwZy6hacbsKKJox4' => 'application#webhook'
+    
     resources :sessions, only: [:create, :destroy]
     resource :home, only: [:show]
 
     root to: "home#show"
-  #end
+
 
   #get 'home/index'
 

@@ -54,3 +54,5 @@ end
   gem 'json'
   gem 'whenever', :require => false
   gem 'sidekiq', '~> 4.1', '>= 4.1.1'
+  gem 'bootstrap-sass', '3.2.0.2'
+  gem 'tele_notify', '~> 0.1.1'
