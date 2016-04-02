@@ -32,7 +32,7 @@ module TeleNotify
         @@callback_url = active_url + "/" + @@token
         RestClient.post(@@url + "setWebhook", { url: @@callback_url })
       else
-        raise "Invalid token! Please add a valid Telegram token in config/initializers/tele_notify.rb or see https://github.com/ppati000/tele_notify for further instructions."
+        raise "Invalid token!"
       end
     end
 
