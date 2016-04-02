@@ -1,10 +1,10 @@
 require 'rest-client'
 
 module TeleNotify
-  class TelegramUser < ::ActiveRecord::Base
+  class User < ::ActiveRecord::Base
 
-    validates_presence_of :telegram_id
-    validates_uniqueness_of :telegram_id
+    validates_presence_of :tele_chat_id
+    validates_uniqueness_of :tele_chat_id
 
     @@next_update_id = 0
 
@@ -38,7 +38,7 @@ module TeleNotify
 
     def self.send_message_to_all(text)
       success = true
-      TeleNotify::TelegramUser.all.each do |user|
+      TeleNotify::User.all.each do |user|
         success = false if !user.send_message(text)
       end
       success
@@ -46,7 +46,7 @@ module TeleNotify
 
 
     def send_message(text)
-      response = JSON.parse(RestClient.post(@@url + "sendMessage", chat_id: self.telegram_id, text: text), { symbolize_names: true })
+      response = JSON.parse(RestClient.post(@@url + "sendMessage", chat_id: self.tele_chat_id, text: text), { symbolize_names: true })
       response[:ok]
     end
 
