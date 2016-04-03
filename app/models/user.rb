@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 require 'rest-client'
 APPLICATION_NAME = 'Apifood'
+ validates_presence_of :tele_chat_id
+ validates_uniqueness_of :tele_chat_id
 
 
   def self.from_omniauth(auth)
