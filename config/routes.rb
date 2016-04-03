@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     get 'telegram', to: 'sessions#telegram'
     post '/159528223:AAFA-XoRiLy3-fYxKWDdwZy6hacbsKKJox4' => 'application#webhook'
     
-    resources :sessions, only: [:create, :destroy]
+    resources :sessions, only: [:create, :destroy, :webhook]
     resource :home, only: [:show]
 
     root to: "home#show"

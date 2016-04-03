@@ -3,10 +3,13 @@ module TeleNotify
     def webhook
       if params[:message]
         #user = User.create( tele_chat_id: params[:message][:from][:id] )
-        user = User.update_all( tele_chat_id: params[:message][:from][:id] )
-        if user
+        puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        user = User.from_omniauth(env["omniauth.auth"])
+        #user = User.find_by_id(:id)
+        user = User.update( tele_chat_id: params[:message][:from][:id] )
+        #if usersssss
           user.send_message("Ура чувак ми можем слать тебе нотифи")
-        end
+        #end
         render :nothing => true, :status => :ok
       end
     end

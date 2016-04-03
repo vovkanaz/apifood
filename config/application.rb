@@ -24,6 +24,7 @@ module Apifood
     config.active_record.raise_in_transactional_callbacks = true
     config.autoload_paths += %W( #{config.root}/lib/modules )
     config.autoload_paths += %W(#{config.root}/lib)
+       config.autoload_paths += %W(#{config.root}/lib/tele_notify)
     config.active_job.queue_adapter = :sidekiq
     #ActiveJob::Base.queue_adapter = :sidekiq
   end

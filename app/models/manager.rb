@@ -9,10 +9,10 @@ class Manager
   require_dependency 'editor'
   require_dependency 'google_auth'
   require_dependency 'site_map_builder'
+  require_dependency 'tele_notify'
 
   def self.handle_order
-    puts "Ваше замовлення обробляється!"
-    Telegram.send_message("Ваше замовлення обробляеться!")
+    TeleNotify::User.find(1).send_message("Ваш запит обробляеться")
     DeferredJob.perform_later
   end
 
