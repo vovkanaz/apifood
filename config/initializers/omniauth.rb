@@ -7,3 +7,4 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       #redirect_uri:'http://127.0.0.1/auth/google_oauth2/callback'
   }
 end
+

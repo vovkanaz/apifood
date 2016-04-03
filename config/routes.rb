@@ -7,12 +7,13 @@ Rails.application.routes.draw do
 
 
     get 'auth/:provider/callback', to: 'sessions#create'
+    get 'auth/:provider/callback', to: 'sessions#telegram'
     get 'auth/failure', to: redirect('/')
     get 'signout', to: 'sessions#destroy', as: 'signout'
     get 'telegram', to: 'sessions#telegram'
-    post '/159528223:AAFA-XoRiLy3-fYxKWDdwZy6hacbsKKJox4' => 'application#webhook'
+    post '/159528223:AAFA-XoRiLy3-fYxKWDdwZy6hacbsKKJox4' => 'sessions#telegram'
     
-    resources :sessions, only: [:create, :destroy, :webhook]
+    resources :sessions, only: [:create, :destroy, :telegram]
     resource :home, only: [:show]
 
     root to: "home#show"
