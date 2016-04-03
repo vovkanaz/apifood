@@ -12,7 +12,7 @@ class Manager
   require_dependency 'tele_notify'
 
   def self.handle_order
-    TeleNotify::User.find(1).send_message("Ваш запит обробляеться")
+    User.find(1).send_message("Ваш запит обробляеться")
     DeferredJob.perform_later
   end
 

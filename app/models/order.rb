@@ -14,7 +14,7 @@ class Order
         else
           #puts "Неможливо обробити запит \"#{order_position}\". Відредагуйте текст замовлення!"
           #Telegram.send_message("Неможливо обробити запит \"#{order_position}\". Відредагуйте текст замовлення!")
-          TeleNotify::User.find(1).send_message("Неможливо обробити запит")
+         User.find(1).send_message("Неможливо обробити запит")
         end
       end
     total_order

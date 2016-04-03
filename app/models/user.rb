@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
 require 'rest-client'
 APPLICATION_NAME = 'Apifood'
- validates_presence_of :tele_chat_id
- validates_uniqueness_of :tele_chat_id
+
 
 
   def self.from_omniauth(auth)
@@ -33,6 +32,8 @@ APPLICATION_NAME = 'Apifood'
    end
 
 
+ #validates_presence_of :tele_chat_id
+ validates_uniqueness_of :tele_chat_id
 
     @@next_update_id = 0
 
@@ -56,7 +57,7 @@ APPLICATION_NAME = 'Apifood'
     def self.configure_token(token)
       if token =~ /^[0-9]+:[\w-]+$/ #hacker proof
         @@token = token
-        @@url = "https://api.telegram.org/bot" + token + "/"
+        @@url ||= "https://api.telegram.org/bot" + token + "/"
         @@callback_url = active_url + "/" + @@token
         RestClient.post(@@url + "setWebhook", { url: @@callback_url })
       else

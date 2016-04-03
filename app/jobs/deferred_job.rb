@@ -30,11 +30,11 @@ class DeferredJob < ActiveJob::Base
             GoogleServices::Table.save_order(worksheet, order_date, executed_order[:order_list], executed_order[:price_counter])
             puts "В #{shop_name.to_s} Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн."
             #Telegram.send_message("В #{shop_name.to_s} Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн.")
-             TeleNotify::User.find(1).send_message("В #{shop_name.to_s} Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн.")
+             User.find(1).send_message("В #{shop_name.to_s} Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн.")
           else
             puts "Не вдалося виконате замовлення, відредагуйте його текст"
             #Telegram.send_message("Не вдалося виконате замовлення, відредагуйте його текст")
-            TeleNotify::User.find(1).send_message("Не вдалося виконате замовлення, відредагуйте його текст")
+            User.find(1).send_message("Не вдалося виконате замовлення, відредагуйте його текст")
             end
         end
         driver.quit

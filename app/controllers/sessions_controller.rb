@@ -8,16 +8,15 @@ class SessionsController < ApplicationController
   end
 
   def telegram
-    puts current_user.id
-    puts "dfsdfddddddddddddddddddddddddddddddddddddddddAA"
-    user = User.find_by_id(current_user.id)
-    puts user
      if params[:message]
+        puts "Alllllllllllllll"  
+        user = User.find_by_id(1)
         user.update(tele_chat_id: params[:message][:from][:id])
      ##  #if usersssss
+      puts "Alllllllllllllll"  
           user.send_message("Ура чувак ми можем слать тебе нотифи")
         #end
-        render :nothing => true, :status => :ok  
+        render :success 
     end  
  end
 

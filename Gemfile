@@ -55,5 +55,4 @@ end
   gem 'whenever', :require => false
   gem 'sidekiq', '~> 4.1', '>= 4.1.1'
   gem 'bootstrap-sass', '3.2.0.2'
-  gem 'rest_client', '~> 1.8', '>= 1.8.3'
-  
+  gem  'rest-client'
