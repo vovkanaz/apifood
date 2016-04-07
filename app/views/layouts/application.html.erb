@@ -21,6 +21,10 @@
       <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
   <% end %>
 </div>
+
+<p style="color: red"> <%= flash[:error] %> </p>
+<p style="color: blue"> <%= flash[:success] %> </p>
+
 <%= yield %>
 </body>
 </html>

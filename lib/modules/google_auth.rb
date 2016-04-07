@@ -56,8 +56,8 @@ module GoogleServices
 
     def self.define_spreadsheet(user)
       google_drive_session = GoogleDrive.login_with_oauth(user.oauth_token)
-      if google_drive_session.spreadsheet_by_title("FoodAudit")
-        spreadsheet = google_drive_session.spreadsheet_by_title("FoodAudit")
+      spreadsheet = google_drive_session.spreadsheet_by_title("FoodAudit")
+      if spreadsheet
         ws = spreadsheet.worksheets[0]
       else
         spreadsheet = google_drive_session.create_spreadsheet(title = "FoodAudit")

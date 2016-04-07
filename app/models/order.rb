@@ -14,13 +14,13 @@ class Order
         else
           #puts "Неможливо обробити запит \"#{order_position}\". Відредагуйте текст замовлення!"
           #Telegram.send_message("Неможливо обробити запит \"#{order_position}\". Відредагуйте текст замовлення!")
-         User.find(1).send_message("Неможливо обробити запит")
+          User.find(1).send_message("Неможливо обробити запит \"#{order_position}\". Відредагуйте текст замовлення!")
         end
       end
     total_order
   end
 
-  def self.execute(driver, order_for_shop, shop_name)
+  def self.execute(driver, user, order_for_shop, shop_name)
     module_name = shop_name.gsub(' ', '').constantize
     price_counter = 0
     order_list = Array.new
@@ -35,8 +35,8 @@ class Order
       end
     end
     if order_list
-      module_name.send_checkout_form(driver, "First name", "Last name", "Company", "Customer adress", 
-                                     "Room 123", "customer_email@example.com", "0931234567")
+      module_name.send_checkout_form(driver, user.first_name, user.last_name, user.company, user.adress, 
+                                     user.room, user.name, user.phone_number)
       return { order_list: order_list, price_counter: price_counter, error: false }
     else
       return { order_list: nil, price_counter: 0, error: true }

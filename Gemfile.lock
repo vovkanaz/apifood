@@ -211,6 +211,9 @@ GEM
       faraday (~> 0.9)
       jwt (~> 1.5)
       multi_json (~> 1.10)
+    simple_form (3.2.1)
+      actionpack (> 4, < 5.1)
+      activemodel (> 4, < 5.1)
     spring (1.4.3)
     sprockets (3.4.0)
       rack (> 1, < 3)
@@ -264,6 +267,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   selenium-webdriver (~> 2.48, >= 2.48.1)
   sidekiq (~> 4.1, >= 4.1.1)
+  simple_form
   spring
   turbolinks
   uglifier (>= 1.3.0)

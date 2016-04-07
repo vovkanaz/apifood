@@ -1,4 +1,4 @@
-module SiteMapBuild
+class SiteMapBuild
 
   def self.for_online_cafe(driver)
     online_cafe_hash = { link: "http://online-cafe.ck.ua/site/shop/",
