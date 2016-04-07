@@ -11,10 +11,13 @@ Rails.application.routes.draw do
     get 'auth/failure', to: redirect('/')
     get 'signout', to: 'sessions#destroy', as: 'signout'
     get 'telegram', to: 'sessions#telegram'
+
     post '/159528223:AAFA-XoRiLy3-fYxKWDdwZy6hacbsKKJox4' => 'sessions#telegram'
     
     resources :sessions, only: [:create, :destroy, :telegram]
+    resources :user, only: [:edit, :update]
     resource :home, only: [:show]
+    
 
     root to: "home#show"
 

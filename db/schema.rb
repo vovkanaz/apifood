@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160402073924) do
+ActiveRecord::Schema.define(version: 20160406122709) do
 
   create_table "shops", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(version: 20160402073924) do
     t.datetime "oauth_expires_at"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.string   "first_name",       limit: 255
+    t.string   "last_name",        limit: 255
+    t.string   "company",          limit: 255
+    t.string   "adress",           limit: 255
+    t.string   "room",             limit: 255
+    t.string   "phone_number",     limit: 255
   end
 
 end
