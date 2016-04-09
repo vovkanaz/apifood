@@ -1,3 +1,13 @@
+<div>
+  <% if current_user %>
+      Signed in as <strong><%= current_user.name %></strong>!
+      <%= link_to "Sign out", signout_path, id: "sign_out" %>
+  <% else %>
+      <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
+  <% end %>
+</div>
+
+<p>Залишилось не багато!!! Мені потрібно трішки інформації про себе:</p>
 <%= simple_form_for @user do |f| %>
   <%= f.input :first_name, :input_html => {:maxlength => 25, :size => 27 } %>
   <%= f.input :last_name, :input_html => {:maxlength => 25, :size => 27 } %>

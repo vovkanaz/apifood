@@ -1,5 +1,6 @@
-class Manager
+class Manager < ActiveRecord::Base
 
+  
   require "google_drive"
   require 'selenium-webdriver'
   require_dependency 'site_map_builder'
@@ -11,8 +12,15 @@ class Manager
   require_dependency 'google_auth'
   require_dependency 'tele_notify'
 
+  def self.my_user(my_user)
+    $my_user = my_user
+  end
+
   def self.handle_order
-    User.find(1).send_message("Ваш запит обробляеться")
+    puts "====================="
+    puts $my_user
+    puts "--------------------"
+    User.find(User.user_id).send_message("Ваш запит обробляеться")
     DeferredJob.perform_later
   end
 

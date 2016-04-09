@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
 require 'rest-client'
+
+
 APPLICATION_NAME = 'Apifood'
-
-
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
@@ -78,5 +78,6 @@ APPLICATION_NAME = 'Apifood'
       response = JSON.parse(RestClient.post(@@url + "sendMessage", chat_id: self.tele_chat_id, text: text), { symbolize_names: true })
       response[:ok]
     end
+
 
 end

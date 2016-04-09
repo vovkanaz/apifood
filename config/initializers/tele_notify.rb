@@ -8,7 +8,7 @@ User.configure_home_url("https://localhost:3000")
 #Extract it and run "./ngrok http 3000"
 #Then copy the URL you get from the console window.
 #Remember to use the HTTPS URL!
-User.configure_dev_url("https://a5fa239b.ngrok.io")
+User.configure_dev_url("https://8003dbe4.ngrok.io")
 
 #Set your Telegram Bot API token here
 #Don't have your token yet? Create your bot using https://telegram.me/botfather
