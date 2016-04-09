@@ -17,6 +17,7 @@ class DeferredJob < ActiveJob::Base
       user.get_events.each do |item|
         #Telegram.send_message(item['description'])
         if item['summary'] == 'Order'
+          User.find(user.id).send_message("Ваш запит обробляеться")
           driver = Selenium::WebDriver.for:phantomjs
           driver.manage.window.maximize
 

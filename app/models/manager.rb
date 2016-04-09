@@ -1,4 +1,4 @@
-class Manager < ActiveRecord::Base
+class Manager
 
   
   require "google_drive"
@@ -12,15 +12,8 @@ class Manager < ActiveRecord::Base
   require_dependency 'google_auth'
   require_dependency 'tele_notify'
 
-  def self.my_user(my_user)
-    $my_user = my_user
-  end
 
   def self.handle_order
-    puts "====================="
-    puts $my_user
-    puts "--------------------"
-    User.find(User.user_id).send_message("Ваш запит обробляеться")
     DeferredJob.perform_later
   end
 
