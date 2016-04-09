@@ -9,12 +9,12 @@
 
 <p>Залишилось не багато!!! Мені потрібно трішки інформації про себе:</p>
 <%= simple_form_for @user do |f| %>
-  <%= f.input :first_name, :input_html => {:maxlength => 25, :size => 27 } %>
-  <%= f.input :last_name, :input_html => {:maxlength => 25, :size => 27 } %>
-  <%= f.input :company, :input_html => {:maxlength => 25, :size => 27 } %>
+  <%= f.input :first_name, :input_html => {:maxlength => 25, :size => 32 } %>
+  <%= f.input :last_name, :input_html => {:maxlength => 25, :size => 32 } %>
+  <%= f.input :company, :input_html => {:maxlength => 25, :size => 32 } %>
   <%= f.input :adress, :input_html => {:maxlength => 30, :size => 32 } %>
-  <%= f.input :room, :input_html => {:maxlength => 10, :size => 12 } %>
-  <%= f.input :phone_number, :input_html => {:maxlength => 15, :size => 17 } %>
+  <%= f.input :room, :input_html => {:maxlength => 10, :size => 32 } %>
+  <%= f.input :phone_number, :input_html => {:maxlength => 15, :size => 32 } %>
 
   <%= f.button :submit %>
 <% end %>

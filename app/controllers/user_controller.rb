@@ -2,6 +2,10 @@ class UserController < ApplicationController
 
   before_filter :find_user, only: [:edit, :update]
 
+  
+
+  
+
   def edit
   end
 
