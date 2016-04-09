@@ -23,7 +23,7 @@ class DeferredJob < ActiveJob::Base
 
           order_date = DateTime.now.strftime('%m.%d.%Y в %I:%M%p')
           total_order = Hash.new
-          total_order = Order.prepare(item)
+          total_order = Order.prepare(item, user)
 
           total_order.each_pair do |shop_name, order_for_shop|
             executed_order = Hash.new
@@ -32,11 +32,11 @@ class DeferredJob < ActiveJob::Base
               GoogleServices::Table.save_order(worksheet, order_date, executed_order[:order_list], executed_order[:price_counter])
               puts "В #{shop_name.to_s} Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн."
               #Telegram.send_message("В #{shop_name.to_s} Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн.")
-              User.find(current_user).send_message("В #{shop_name.to_s} Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн.")
+              User.find(user.id).send_message("В #{shop_name.to_s} Ви замовили \"#{executed_order[:order_list].join(', ')}\" на суму #{executed_order[:price_counter]} грн.")
             else
               puts "Не вдалося виконате замовлення, відредагуйте його текст"
               #Telegram.send_message("Не вдалося виконате замовлення, відредагуйте його текст")
-              User.find(current_user).send_message("Не вдалося виконате замовлення, відредагуйте його текст")
+              User.find(user.id).send_message("Не вдалося виконате замовлення, відредагуйте його текст")
             end
           end
           driver.quit

@@ -9,12 +9,15 @@ class SessionsController < ApplicationController
 
   def telegram
      if params[:message]
-        puts "-------------------------------------"  
         user = User.find_by(current_user)
-        puts "============================================"  
-        user.update(tele_chat_id: params[:message][:from][:id])
-        puts "_________________________________________________"  
-        user.send_message("Тепер ми можемо слати нотіфі!!! Для допомги по роботі з ботом відішліть боту команду /help")
+        puts "============================================"
+        if user.tele_chat_id     
+          user.update(tele_chat_id: params[:message][:from][:id])
+          user.send_message("Тепер я можу слати вам повідомлення!!! Для допомги по роботі з ботом відішліть боту команду /help")
+        else
+          flash[:good] = "У нас е вже твий чат ид пошол на хуй"
+          redirect_to telegram_path
+        end
     end
   end
 
