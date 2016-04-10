@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
         puts "============================================"
         if user.tele_chat_id     
           user.update(tele_chat_id: params[:message][:from][:id])
-          user.send_message("Тепер я можу слати вам повідомлення!!! Для допомги по роботі з ботом відішліть боту команду /help")
+          #user.send_message("Тепер я можу слати вам повідомлення!!! Для допомги по роботі з ботом відішліть боту команду /help")
         else
           flash[:good] = "У нас е вже твий чат ид"
           redirect_to telegram_path

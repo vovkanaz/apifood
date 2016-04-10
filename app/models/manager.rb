@@ -13,10 +13,6 @@ class Manager
   require_dependency 'tele_notify'
 
 
-  def self.handle_order
-    DeferredJob.perform_later
-  end
-
   def self.update_site_map
     driver = Selenium::WebDriver.for:phantomjs
     driver.manage.window.maximize
