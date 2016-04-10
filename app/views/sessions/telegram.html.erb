@@ -1,6 +1,5 @@
 
-  <% if current_user %>
-
+<% if current_user %>
       Signed in as <strong><%= current_user.name %></strong>!
       <%= link_to "Sign out", signout_path, id: "sign_out" %>
   <% else %>
@@ -12,11 +11,7 @@
     <end>  
   <% end %>
 
-<center>
-<%= image_tag("term.jpg", :alt => "rss feed") %>
-</center>
-<center>
-<p><b><i>Мені потрібен твій Telegram ID. Щоб я його отримав клікни будь-ласка на ссилку нижче </i></b></p>
-
+<h1>Мені потрібен твій Telegram ID.<br>
+Щоб я його отримав клікни будь-ласка<br>
+на ссилку нижче </h1>
 <a href="https://telegram.me/Mocbot">Княпай</a>
-</center>

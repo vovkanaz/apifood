@@ -10,10 +10,14 @@ background-image: image-url("bg.jpg")
     font-size: 25px;
     padding-bottom: 3px;
     color: #ffffff;
-
+    margin: 100px;
 }
 
-h1 { color: #000; font-size: 48px; font-family: 'PT Sans', arial; padding-bottom: 10px; }
+h2 { color: #fff; font-size: 40px; font-family: 'PT Sans', arial; padding-bottom: 10px;
+text-shadow: 0 0 2px #000; /* horizontal-offset vertical-offset 'blur' colour */
+  -moz-text-shadow: 0 0 2px #000;
+  -webkit-text-shadow: 0 0 2px #000;
+ }
 
 
 p { font-family: 'Inder', sans-serif; line-height: 28px; margin-bottom: 15px; color: #666; }
