@@ -1,7 +1,7 @@
 
 <% if current_user %>
-      Signed in as <strong><%= current_user.name %></strong>!
-      <%= link_to "Sign out", signout_path, id: "sign_out" %>
+      <div class="login">Привіт <strong><%= current_user.name %></strong>!
+      <%= link_to "Вийти", signout_path, id: "sign_out" %></div>
   <% else %>
     <div class="heading">
     <p>Привіт я Apifood - ваш вірний слуга який буде замовляти їжу за вас!!!</p>
@@ -13,5 +13,6 @@
 
 <h1>Мені потрібен твій Telegram ID.<br>
 Щоб я його отримав клікни будь-ласка<br>
-на ссилку нижче </h1>
-<a href="https://telegram.me/Mocbot">Княпай</a>
+на ссилку нижче <br>
+<a href="https://telegram.me/Mocbot" class="myButton">Start Messaging</a>
+</h1>

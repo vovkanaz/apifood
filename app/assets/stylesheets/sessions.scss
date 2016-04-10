@@ -9,14 +9,17 @@ text-shadow: 0 0 2px #000; /* horizontal-offset vertical-offset 'blur' colour */
   margin: 100px;
 }
 
+.login {
+	color: snow; font-size: 28px; font-family: 'PT Sans', arial; padding-bottom: 10px; 
+text-shadow: 0 0 2px #000; /* horizontal-offset vertical-offset 'blur' colour */
+  -moz-text-shadow: 0 0 2px #000;
+  -webkit-text-shadow: 0 0 2px #000;
+}
+
 
 p { font-family: 'Inder', sans-serif; line-height: 28px; margin-bottom: 15px; color: #666; }
 
 
-a { color: #ff4411; transition: .5s; -moz-transition: .5s; -webkit-transition: .5s; -o-transition: .5s; }
-
-
-a:hover { color: #a03c21 }
 
 
 .date { float: left }
@@ -32,3 +35,28 @@ a:hover { color: #a03c21 }
 
 
 .meta-info p { font-family: 'Fenix', serif; font-style: italic; color: #666; font-size: 16px; }
+
+.myButton {
+	-moz-box-shadow:inset 0px -3px 7px 0px #29bbff;
+	-webkit-box-shadow:inset 0px -3px 7px 0px #29bbff;
+	box-shadow:inset 0px -3px 7px 0px #29bbff;
+	background-color:#2dabf9;
+	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
+	border-radius:7px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:14px 37px;
+	text-decoration:none;
+	text-shadow:0px 1px 3px #9bafeb;
+}
+.myButton:hover {
+	background-color:#3da4ff;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
