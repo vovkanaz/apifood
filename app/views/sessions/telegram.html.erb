@@ -1,9 +1,18 @@
 
-<center>
-<%= image_tag("term.jpg", :alt => "rss feed") %>
-</center>
-<center>
-<p><b><i>Мені потрібен твій Telegram ID. Щоб я його отримав клікни будь-ласка на ссилку нижче </i></b></p>
+<% if current_user %>
+      <div class="login">Привіт <strong><%= current_user.name %></strong>!
+      <%= link_to "Вийти", signout_path, id: "sign_out" %></div>
+  <% else %>
+    <div class="heading">
+    <p>Привіт, я Apifood - Ваш вірний слуга, який буде замовляти їжу за Вас!!!</p>
+    <p>Для того щоб почати використовувати мене, будь ласка, натисніть на посилання нижче</p>
 
-<a href="https://telegram.me/Mocbot">Княпай</a>
-</center>
+    <%= link_to image_tag("google.png"), "/auth/google_oauth2", id: "sign_in" %>
+    <end>  
+  <% end %>
+
+<h1>Мені потрібен Ваш Telegram ID.<br>
+Щоб я його отримав, натисніть, будь ласка,<br>
+на посилання нижче <br>
+<a href="https://telegram.me/Mocbot" class="myButton">Start Messaging</a>
+</h1>

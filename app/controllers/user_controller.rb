@@ -9,8 +9,8 @@ class UserController < ApplicationController
     @user.update_attributes(params_for_user)
     unless !@user.errors.empty? || @user.first_name.empty? || @user.last_name.empty? || 
             @user.adress.empty? || @user.phone_number.empty?
-      flash[:success] = "Your personal information saved"
-      redirect_to telegram_path
+      flash[:success] = "Ви успішно зареєструвались"
+      redirect_to check_telegram_chat_id_path
     else
       flash.now[:error] = "You made mistakes! Please, correct them!"
       render "edit"

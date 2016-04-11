@@ -1,3 +1,62 @@
 // Place all the styles related to the Sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h1 { color: snow; font-size: 48px; font-family: 'PT Sans', arial; padding-bottom: 10px; 
+text-shadow: 0 0 2px #000; /* horizontal-offset vertical-offset 'blur' colour */
+  -moz-text-shadow: 0 0 2px #000;
+  -webkit-text-shadow: 0 0 2px #000;
+  margin: 100px;
+}
+
+.login {
+	color: snow; font-size: 28px; font-family: 'PT Sans', arial; padding-bottom: 10px; 
+text-shadow: 0 0 2px #000; /* horizontal-offset vertical-offset 'blur' colour */
+  -moz-text-shadow: 0 0 2px #000;
+  -webkit-text-shadow: 0 0 2px #000;
+}
+
+
+p { font-family: 'Inder', sans-serif; line-height: 28px; margin-bottom: 15px; color: #666; }
+
+
+
+
+.date { float: left }
+
+
+.author { float: right }
+
+
+.entry-content { border-bottom: 3px solid #666; padding: 0 0 15px 0; margin-bottom: 8px; }
+
+
+.meta-info { padding: 5px; overflow: hidden; }
+
+
+.meta-info p { font-family: 'Fenix', serif; font-style: italic; color: #666; font-size: 16px; }
+
+.myButton {
+	-moz-box-shadow:inset 0px -3px 7px 0px #29bbff;
+	-webkit-box-shadow:inset 0px -3px 7px 0px #29bbff;
+	box-shadow:inset 0px -3px 7px 0px #29bbff;
+	background-color:#2dabf9;
+	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
+	border-radius:7px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:14px 37px;
+	text-decoration:none;
+	text-shadow:0px 1px 3px #9bafeb;
+}
+.myButton:hover {
+	background-color:#3da4ff;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}

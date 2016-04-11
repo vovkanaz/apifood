@@ -1,6 +1,5 @@
 
-<center>
-<%= image_tag("unnamed.png", :alt => "rss feed") %>
+
 <div>
   <% if current_user %>
 
@@ -8,11 +7,11 @@
       <%= link_to "Sign out", signout_path, id: "sign_out" %>
   <% else %>
     <div class="heading">
-    <p>Привіт я Apifood - ваш вірний слуга який буде замовляти їжу за вас!!!</p>
-    <p>Для того щоб почати використовувати мене будь-ласка клікніть на ссилку нижче</p>
+    <h2>Привіт, я Apifood!<br>
+    Для того, щоб почати використовувати мене, <br>
+    будь ласка, зареєструйтесь.</h2>
 
     <%= link_to image_tag("google.png"), "/auth/google_oauth2", id: "sign_in" %>
     <end>  
   <% end %>
 </div>
-</center>

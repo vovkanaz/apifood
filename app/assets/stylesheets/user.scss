@@ -5,15 +5,17 @@
 .form-style-2{
     max-width: 550px;
     padding: 20px 12px 10px 20px;
-    font: 13px Arial, Helvetica, sans-serif;
+    font: 15px Arial, Helvetica, sans-serif;
 }
 .form-style-2-heading{
     font-weight: bold;
     font-style: italic;
     border-bottom: 2px solid #ddd;
     margin-bottom: 20px;
-    font-size: 15px;
+    font-size: 23px;
     padding-bottom: 3px;
+    color: white; font-weight: bold; font-size: 14px; font-family: Arial, Helvetica, sans-serif; padding: 3px 10px; background-color: #ff6600; border-radius: 5px; float: left;
+
 }
 .form-style-2 label{
     display: block;
@@ -82,7 +84,7 @@
 .form-style-2 input[type=submit]:hover,
 .form-style-2 input[type=button]:hover{
     background: #EA7B00;
-    color: #fff;
+    
 }
 
 
@@ -91,6 +93,8 @@
   width: 100px;
   text-align: right;
   margin: 2px 10px;
+  color: white; font-weight: bold; font-size: 14px; font-family: Arial, Helvetica, sans-serif; padding: 3px 10px; background-color: #ff6600; border-radius: 5px; float: left;
+
 }
 
 .outer-div { position: relative; float: right; right: 50%; }

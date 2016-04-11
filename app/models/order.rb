@@ -11,7 +11,7 @@ class Order
           total_order[shop_name] = [] unless total_order[shop_name]
           total_order[shop_name] << single_order
         else
-          #User.find(user.id).send_message("Неможливо обробити запит \"#{order_position}\". Відредагуйте текст замовлення!")
+          User.find(user.id).send_message("Неможливо обробити запит \"#{order_position}\". Відредагуйте текст замовлення!")
         end
       end
     total_order
@@ -27,8 +27,7 @@ class Order
         price_counter += module_response[:price] * position[:dishes_number]
         order_list << "#{module_response[:dish_name]} --> #{position[:dishes_number]}"
       else
-        puts "Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!"
-        #User.find(user.id).send_message("Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!")
+        User.find(user.id).send_message("Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!")
       end
     end
     if order_list
