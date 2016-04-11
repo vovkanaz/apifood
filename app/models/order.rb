@@ -1,7 +1,6 @@
 class Order
 
   def self.prepare(item, user)
-    #Telegram.send_message(item['description'])
     total_order = Hash.new
     order_array = item['description'].split(', ')
       order_array.each do |order_position|
@@ -28,7 +27,6 @@ class Order
         price_counter += module_response[:price] * position[:dishes_number]
         order_list << "#{module_response[:dish_name]} --> #{position[:dishes_number]}"
       else
-        puts "Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!"
         User.find(user.id).send_message("Неможливо обробити запит \"#{order[:dish_name]}\". Відредагуйте текст замовлення!")
       end
     end

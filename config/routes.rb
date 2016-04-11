@@ -10,11 +10,12 @@ Rails.application.routes.draw do
     get 'auth/:provider/callback', to: 'sessions#telegram'
     get 'auth/failure', to: redirect('/')
     get 'signout', to: 'sessions#destroy', as: 'signout'
+    get 'check_telegram_chat_id', to: 'sessions#check_telegram_chat_id'
     get 'telegram', to: 'sessions#telegram'
 
     post '/159528223:AAFA-XoRiLy3-fYxKWDdwZy6hacbsKKJox4' => 'sessions#telegram'
     
-    resources :sessions, only: [:create, :destroy, :telegram]
+    resources :sessions, only: [:create, :destroy, :telegram, :check_telegram_chat_id]
     resources :user, only: [:edit, :update]
     resource :home, only: [:show]
     

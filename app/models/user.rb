@@ -31,8 +31,6 @@ APPLICATION_NAME = 'Apifood'
     result.data['items']
    end
 
-
- #validates_presence_of :tele_chat_id
  validates_uniqueness_of :tele_chat_id
 
     @@next_update_id = 0

@@ -13,10 +13,6 @@ class Manager
   require_dependency 'tele_notify'
 
 
-  def self.handle_order
-    DeferredJob.perform_later
-  end
-
   def self.update_site_map
     driver = Selenium::WebDriver.for:phantomjs
     driver.manage.window.maximize
@@ -25,7 +21,6 @@ class Manager
       site_map = {}
       if shop.name
         method_name = "for_#{shop.name}".downcase.gsub(' ', '_')
-        puts method_name
         site_map = SiteMapBuild.send(method_name, driver)
         shop.update_attributes(site_map: site_map) if site_map
       end
