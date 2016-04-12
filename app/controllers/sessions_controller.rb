@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  
   cattr_accessor :user
   skip_before_action :authenticate_user!, only: [:create]
 
@@ -47,8 +48,7 @@ class SessionsController < ApplicationController
     success = false
     if self.user
       success = true if self.user.update(tele_chat_id: params[:message][:from][:id])
-      message_text = message('./public/first_notify.txt')
-      self.user.send_message(message_text) if success
+      message('./public/first_notify.txt', self.user) if success 
       self.user = nil if success
     else
       unknown_message
@@ -56,19 +56,18 @@ class SessionsController < ApplicationController
   end
 
   def help_instructions
-    message_text = message('./public/help_instructions.txt')
-    chat_user.send_message(message_text)
+    message('./public/help_instructions.txt', chat_user)
   end
 
   def unknown_message
-    message_text = message('./public/unknown_message.txt')
-    chat_user.send_message(message_text)
+    message('./public/unknown_message.txt', chat_user)
   end
 
-  def message(load_path)
+  def message(load_path, user)
     lines = Array.new
     File.open(load_path, "r").each_line { |line| lines << line}
-    lines.join
+    message_text = lines.join
+    user.send_message(message_text)
   end
 
 end
