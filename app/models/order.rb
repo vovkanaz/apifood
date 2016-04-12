@@ -11,7 +11,7 @@ class Order
           total_order[shop_name] = [] unless total_order[shop_name]
           total_order[shop_name] << single_order
         else
-          User.find(user.id).send_message("Неможливо обробити запит \"#{order_position}\". Відредагуйте текст замовлення!")
+          User.find(user.id).send_message("Неможливо обробити позицію замовлення \"#{order_position}\". Відредагуйте текст замовлення!")
         end
       end
     total_order

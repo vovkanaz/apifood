@@ -11,11 +11,15 @@ class DeferredJob < ActiveJob::Base
   require_dependency 'tele_notify'
   
   def perform
+    users_orders = Hash.new
     User.where.not(oauth_token: nil).each do |user|
+      users_orders[user] = user.get_events
+    end
+    users_orders.each_pair do |user, events|
       worksheet = GoogleServices::Table.define_spreadsheet(user)
-      user.get_events.each do |item|
+      events.each do |item|
         if item['summary'] == 'Order'
-          User.find(user.id).send_message("Ваш запит обробляеться")
+          User.find(user.id).send_message("Ваше замовлення обробляється")
           driver = Selenium::WebDriver.for:phantomjs
           driver.manage.window.maximize
 
