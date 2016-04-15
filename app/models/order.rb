@@ -1,8 +1,7 @@
 class Order
 
-  def self.prepare(item, user)
+  def self.prepare(order_array, user)
     total_order = Hash.new
-    order_array = item['description'].split(', ')
       order_array.each do |order_position|
         single_order = Hash.new
         single_order = Order.handle_order_position(order_position)

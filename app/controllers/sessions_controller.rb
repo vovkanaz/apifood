@@ -27,9 +27,10 @@ class SessionsController < ApplicationController
       when "/help"
         help_instructions
       else
-        unknown_message
+        define_action
       end
     end
+    render :nothing => true, :status => 200, :content_type => 'text/html'
   end
 
   def destroy
@@ -57,6 +58,18 @@ class SessionsController < ApplicationController
 
   def help_instructions
     message('./public/help_instructions.txt', chat_user)
+  end
+
+  def define_action
+    if params[:message][:text].include? "/order" 
+      chat_user.send_message("Ваше замовлення обробляється")  
+      order_string = (params[:message][:text].split(' ') - "/order".split).join(' ')
+      order_array = order_string.split(', ')
+      Manager.handle_order(order_array, chat_user)
+      chat_user.send_message("Ви нічого не замовили!") if order_string == ""
+    else
+      unknown_message
+    end
   end
 
   def unknown_message
