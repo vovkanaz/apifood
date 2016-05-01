@@ -57,3 +57,4 @@ end
   gem 'bootstrap-sass', '3.2.0.2'
   gem 'simple_form'
   gem 'rest-client'
+  gem 'annotate', '~> 2.7'
