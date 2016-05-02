@@ -35,4 +35,23 @@ include Models
     end
   end
 
+
+     APPLICATION_NAME = 'Apifood' 
+    
+      def get_events
+       client = Google::APIClient.new
+       client.authorization.access_token = self.oauth_token
+       service = client.discovered_api('calendar', 'v3')
+       result = client.execute(
+        :api_method => service.events.list,
+        :parameters => {
+            :calendarId => 'primary',
+            :maxResults => 10,
+            :singleEvents => true,
+            :orderBy => 'startTime',
+            :timeMin => Time.now.iso8601 })
+
+        result.data['items']
+        end
+
 end

@@ -7,12 +7,14 @@
   
     end
     
-    module Events
      APPLICATION_NAME = 'Apifood'	
-      
-      def get_events
+
+
+
+     
+      def self.get_events
        client = Google::APIClient.new
-       client.authorization.access_token = self.oauth_token
+       client.authorization.access_token = user.oauth_token
        service = client.discovered_api('calendar', 'v3')
        result = client.execute(
         :api_method => service.events.list,
@@ -25,11 +27,7 @@
 
         result.data['items']
         end
-    
-    end
-
-
-
+ 
     cattr_accessor :url
   	@@next_update_id = 0
 
