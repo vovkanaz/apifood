@@ -30,7 +30,8 @@ class SessionsController < ApplicationController
         define_action
       end
     end
-    render :nothing => true, :status => 200, :content_type => 'text/html'
+    render "telegram"
+    #render :nothing => true, :status => 200, :content_type => 'text/html'
   end
 
   def destroy
