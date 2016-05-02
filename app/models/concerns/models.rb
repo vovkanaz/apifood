@@ -1,4 +1,5 @@
  module Models 
+ 	
  	extend ActiveSupport::Concern
     cattr_accessor :url
 
@@ -6,27 +7,7 @@
       validates_uniqueness_of :tele_chat_id
   
     end
-    
-     APPLICATION_NAME = 'Apifood'	
 
-
-
-     
-      def self.get_events
-       client = Google::APIClient.new
-       client.authorization.access_token = user.oauth_token
-       service = client.discovered_api('calendar', 'v3')
-       result = client.execute(
-        :api_method => service.events.list,
-        :parameters => {
-            :calendarId => 'primary',
-            :maxResults => 10,
-            :singleEvents => true,
-            :orderBy => 'startTime',
-            :timeMin => Time.now.iso8601 })
-
-        result.data['items']
-        end
  
     cattr_accessor :url
   	@@next_update_id = 0
