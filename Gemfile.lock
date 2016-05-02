@@ -48,6 +48,9 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.8)
+    annotate (2.7.0)
+      activerecord (>= 3.2, < 6.0)
+      rake (~> 10.4)
     arel (6.0.3)
     autoparse (0.3.3)
       addressable (>= 2.3.1)
@@ -80,6 +83,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    diff-lcs (1.2.5)
     domain_name (0.5.20160310)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
@@ -185,6 +189,23 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.8)
     retriable (1.4.1)
+    rspec-core (3.4.4)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-rails (3.4.2)
+      actionpack (>= 3.0, < 4.3)
+      activesupport (>= 3.0, < 4.3)
+      railties (>= 3.0, < 4.3)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
     rubyzip (1.1.7)
     sass (3.4.19)
     sass-rails (5.0.4)
@@ -249,6 +270,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate (~> 2.7)
   bootstrap-sass (= 3.2.0.2)
   byebug
   coffee-rails (~> 4.1.0)
@@ -263,6 +285,7 @@ DEPENDENCIES
   omniauth-google-oauth2!
   rails (= 4.2.4)
   rest-client
+  rspec-rails (~> 3.4, >= 3.4.2)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   selenium-webdriver (~> 2.48, >= 2.48.1)

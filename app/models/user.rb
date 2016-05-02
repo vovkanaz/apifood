@@ -1,3 +1,25 @@
+# == Schema Information
+# Schema version: 20160406122709
+#
+# Table name: users
+#
+#  id               :integer          not null, primary key
+#  provider         :string(255)
+#  uid              :string(255)
+#  name             :string(255)
+#  oauth_token      :string(255)
+#  tele_chat_id     :string(255)
+#  oauth_expires_at :datetime
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  first_name       :string(255)
+#  last_name        :string(255)
+#  company          :string(255)
+#  adress           :string(255)
+#  room             :string(255)
+#  phone_number     :string(255)
+#
+
 class User < ActiveRecord::Base
 require 'rest-client'
 
@@ -53,7 +75,6 @@ APPLICATION_NAME = 'Apifood'
       end
     end
 
-
     def self.configure_token(token)
       if token =~ /^[0-9]+:[\w-]+$/ #hacker proof
         @@token = token
@@ -72,7 +93,6 @@ APPLICATION_NAME = 'Apifood'
       end
       success
     end
-
 
     def send_message(text)
       response = JSON.parse(RestClient.post(self.url + "sendMessage", chat_id: self.tele_chat_id, text: text), { symbolize_names: true })
