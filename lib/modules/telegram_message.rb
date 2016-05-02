@@ -1,4 +1,3 @@
-
 module Telegram
  require 'net/http'
   def self.send_message(order)

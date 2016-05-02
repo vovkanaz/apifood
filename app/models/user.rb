@@ -75,7 +75,6 @@ APPLICATION_NAME = 'Apifood'
       end
     end
 
-
     def self.configure_token(token)
       if token =~ /^[0-9]+:[\w-]+$/ #hacker proof
         @@token = token
@@ -94,7 +93,6 @@ APPLICATION_NAME = 'Apifood'
       end
       success
     end
-
 
     def send_message(text)
       response = JSON.parse(RestClient.post(self.url + "sendMessage", chat_id: self.tele_chat_id, text: text), { symbolize_names: true })
