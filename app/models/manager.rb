@@ -11,7 +11,7 @@ class Manager
 
 
   def self.handle_order(order_array, user)
-    driver = Selenium::WebDriver.for:phantomjs
+    driver = Selenium::WebDriver.for :phantomjs
     driver.manage.window.maximize
 
     order_date = DateTime.now.strftime('%m.%d.%Y в %I:%M%p')

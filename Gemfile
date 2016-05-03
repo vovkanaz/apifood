@@ -59,3 +59,5 @@ end
   gem 'simple_form'
   gem 'rest-client'
   gem 'annotate', '~> 2.7'
+  gem 'factory_girl_rails' #=> mocking
+  gem 'capybara', :git => "http://github.com/jnicklas/capybara.git" 
