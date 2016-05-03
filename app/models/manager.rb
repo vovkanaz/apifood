@@ -3,13 +3,11 @@ class Manager
   require "google_drive"
   require 'selenium-webdriver'
   require_dependency 'site_map_builder'
-  require_dependency 'telegram_message'
   require_dependency 'online_cafe'
   require_dependency 'bambolina'
   require_dependency 'fugu'
   require_dependency 'editor'
   require_dependency 'google_auth'
-  require_dependency 'tele_notify'
 
 
   def self.handle_order(order_array, user)

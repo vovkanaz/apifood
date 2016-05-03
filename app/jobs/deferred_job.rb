@@ -3,12 +3,9 @@ class DeferredJob < ActiveJob::Base
   require 'google/api_client'
   require 'google_drive'
   require 'selenium-webdriver'
-  require_dependency 'telegram_message'
   require_dependency 'online_cafe'
   require_dependency 'bambolina'
   require_dependency 'editor'
-  require_dependency 'google_auth'
-  require_dependency 'tele_notify'
   
   def perform
     users_orders = Hash.new
