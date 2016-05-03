@@ -4,7 +4,7 @@ require 'google_auth'
 describe GoogleServices do
 
   before(:all) do
-    @user = User.new(oauth_token: "ya29.CjLWAjPuOE2Exp_Aqym70WW4Huwe-53DmNf2iQdhrGfNDoxhaTCT6e18fWagaktc4n6t1A")
+    @user = User.new(oauth_token: "ya29.CjLXAibNkA9TcDXrDBxYmf_PXqnhT3WBRRquFsd3s4vgC...")
     @ws = GoogleServices::Table.define_spreadsheet(@user)
     @order_date = DateTime.now.strftime('%m.%d.%Y в %I:%M%p')
     @order_list = ["БУЛЬЙОН КУРЯЧИЙ З ЛОКШИНОЮ --> 2"]
