@@ -38,7 +38,7 @@ module Bambolina
     sleep 5
     element = driver.find_element(:class, "remember-email")
     element.find_element(:tag_name, "input").send_keys "#{email}"
-    driver.find_element(:class, "k2store_checkout_button").click
+    driver.find_element(:class, "k2store_checkout_button").submit
     driver.find_element(:id,"billing_firstname").send_keys "#{first_name} #{last_name}"
     driver.find_element(:id,"billing_address_1").send_keys "#{adress} #{room}"
     driver.find_element(:id,"billing_phone_1").send_keys "#{phone_number}"

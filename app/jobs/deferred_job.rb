@@ -6,8 +6,6 @@ class DeferredJob < ActiveJob::Base
   require_dependency 'online_cafe'
   require_dependency 'bambolina'
   require_dependency 'editor'
-  require_dependency 'google_auth'
-  require_dependency 'tele_notify'
   
   def perform
     users_orders = Hash.new
