@@ -17,7 +17,7 @@ describe Order do
                          link: "http://online-cafe.ck.ua/site/product-category/pershi-stravi/"}]
 	  shop_name = 'Online Cafe'
       result = Order.execute(@driver, @user, order_for_shop, shop_name)
-      if result.respond_to?(:keys)
+      if expect(result.respond_to?(:keys)).to be true
         result.each_value do |value|
           expect(value).to_not be_nil
         end
@@ -27,7 +27,7 @@ describe Order do
 	it 'prepares order data before execute it and back not empty hash' do
 	  order_array = @order_position.split(', ')
 	  result = Order.prepare(order_array, @user)
-	  if result.respond_to?(:keys)
+	  if expect(result.respond_to?(:keys)).to be true
         expect(result.keys).to_not match_array([])
       end
 	end
@@ -35,14 +35,14 @@ describe Order do
 	it 'prepares order data before execute it and back empty hash' do
 	  order_array = "Суп".split
 	  result = Order.prepare(order_array, @user)
-	  if result.respond_to?(:keys)
+	  if expect(result.respond_to?(:keys)).to be true
         expect(result.keys).to match_array([])
       end
 	end
 
 	it 'handles order position and back hash with data' do
 	  result = Order.handle_order_position(@order_position)
-	  if result.respond_to?(:keys)
+	  if expect(result.respond_to?(:keys)).to be true
         result.each_value do |value|
           expect(value).to_not be_nil
           expect(value).to_not eq(0)
@@ -53,7 +53,7 @@ describe Order do
 	it 'handles order position and back hash without data' do
 	  order_position = "Суп 2"
 	  result = Order.handle_order_position(order_position)
-	  if result.respond_to?(:keys)
+	  if expect(result.respond_to?(:keys)).to be true
         result.each_value do |value|
           expect(value).to be_nil.or eq(0)
         end
